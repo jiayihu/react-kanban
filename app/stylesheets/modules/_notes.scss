@@ -1,0 +1,22 @@
+.notes-list {
+  list-style-type: none;
+  padding: 0 2em;
+}
+
+.note {
+  font-size: 1.125em;
+  padding: 1em 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba($gray-light, .3);
+  }
+
+  &__remove {
+    color: rgba($gray-dark, .3);
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-left: 5px;
+    vertical-align: sub;
+  }
+}

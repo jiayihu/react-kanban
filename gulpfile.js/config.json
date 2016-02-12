@@ -1,0 +1,69 @@
+{
+  "root": {
+    "src": "./app",
+    "dest": "./webapp/public"
+  },
+
+  "tasks": {
+    "browserSync": {
+      "browser": "Google Chrome",
+      "server": {
+        "baseDir": "./webapp/public"
+      },
+      "notify": false
+    },
+
+    "css": {
+      "src": "stylesheets",
+      "dest": "css",
+      "autoprefixer": {
+        "browsers": ["last 3 version"]
+      },
+      "sass": {
+        "indentedSyntax": true
+      },
+      "cssnano": {
+
+      },
+      "extensions": ["scss", "css", "sass"]
+    },
+
+    "fonts": {
+      "src": "fonts",
+      "dest": "fonts",
+      "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
+    },
+
+    "html": {
+      "src": "html",
+      "dest": "./",
+      "htmlmin": {
+        "collapseWhitespace": true
+      },
+      "excludeFolders": ["layouts", "shared", "macros", "data", "includes"],
+      "extensions": ["html", "json"]
+    },
+
+    "images": {
+      "src": "images",
+      "dest": "images",
+      "extensions": ["jpg", "png", "svg", "gif"]
+    },
+
+    "scripts": {
+      "main": "app.jsx",
+      "src": "javascripts",
+      "dest": "js",
+      "extensions": ["js", "jsx"]
+    },
+
+    "server": {
+      "app": "./webapp/server.js"
+    },
+
+    "static": {
+      "src": "static",
+      "dest": "./"
+    }
+  }
+}

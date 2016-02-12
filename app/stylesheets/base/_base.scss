@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-attachment: fixed;
+  background-color: $gray-dark;
+  color: $text;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+a {
+  color: $accent;
+  text-decoration: none;
+  transition: color ease-in-out .4s;
+
+  &:hover {
+    color: darken($accent, 10%);
+  }
+}
+
+p {
+  font-size: 1em;
+  font-weight: 300;
+}
+
+h1 {
+  font-family: Source Code Pro;
+  font-weight: 300;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  background-color: $primary;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px $gray-light;
+  color: #fff;
+  padding: .5em 1em;
+  transition: all .3s ease-out;
+}
+
+button:focus {
+  background-color: $primary-dark;
+  box-shadow: 0 2px 4px $gray;
+  outline: 0;
+}
+
+input {
+  border: 0;
+  border-bottom: 2px solid $accent;
+  padding: 0.3em;
+
+  &:focus {
+    outline: none;
+  }
+}

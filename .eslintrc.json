@@ -1,0 +1,54 @@
+{
+    "rules": {
+        "indent": [
+            2,
+            2
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "no-console": [
+            0
+        ],
+        "no-unused-vars": [
+          1
+        ],
+        "no-undefined": [
+          1
+        ],
+        "no-use-before-define": [
+          2
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "valid-jsdoc": [
+          1,
+          {
+            "requireReturn": false,
+            "requireReturnDescription": false
+          }
+        ]
+    },
+
+    "env": {
+        "browser": true,
+        "node": true
+    },
+
+    "ecmaFeatures": {
+      "jsx": true
+    },
+
+    "plugins": [
+      "react"
+    ],
+
+    "extends": "eslint:recommended"
+}

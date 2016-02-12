@@ -1,0 +1,32 @@
+.app {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: -3px 6px 10px rgba(0, 0, 0, .2);
+  height: 100vh;
+  margin: auto;
+  position: relative;
+  text-align: center;
+
+  @media (min-width: $screen-phone) {
+    height: 90vh;
+    margin: 5vh auto;
+    max-width: $screen-phone;
+    width: 90%;
+  }
+}
+
+.react-kanban {
+  height: 100%;
+}
+
+.header {
+  align-items: center;
+  background-color: darken($gray-dark, 10%);
+  background-image: url('../images/nature.jpeg');
+  background-size: cover;
+  border-bottom: 4px solid $gray-dark;
+  color: $gray-light;
+  display: flex;
+  height: 30%;
+  justify-content: center;
+}
