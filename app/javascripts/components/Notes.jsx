@@ -7,7 +7,7 @@ var Notes = React.createClass({
       return (
         <Note
           key={note.id}
-          task={note.task}
+          text={note.text}
           onDelete={this.props.onDelete.bind(null, note.id)}
           onEdit={this.props.onEdit.bind(null, note.id)}
         />

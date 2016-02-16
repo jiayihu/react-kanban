@@ -51,7 +51,7 @@
     },
 
     "scripts": {
-      "main": "app.jsx",
+      "main": "index.jsx",
       "src": "javascripts",
       "dest": "js",
       "extensions": ["js", "jsx"]
