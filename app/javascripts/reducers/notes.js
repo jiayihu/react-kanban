@@ -1,5 +1,5 @@
 var types = require('../actions/notes').types;
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var initialState = [
   {
@@ -16,7 +16,7 @@ var initialState = [
   }
 ];
 
-module.exports = function(state, action) {
+var reducer = function(state, action) {
   state = state || initialState;
 
   switch (action.type) {
@@ -40,3 +40,5 @@ module.exports = function(state, action) {
       return state;
   }
 };
+
+module.exports = reducer;

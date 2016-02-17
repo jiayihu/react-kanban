@@ -7,7 +7,7 @@
     "url": "git@github.com:jiayihu/react-kanban.git"
   },
   "scripts": {
-    "build": "gulp",
+    "build": "NODE_ENV=production gulp vendorScripts",
     "clean": "rm -rf webapp/public && mkdir webapp/public ",
     "dev": "gulp",
     "production": "npm run clean && NODE_ENV=production gulp production",
@@ -49,10 +49,11 @@
     "watchify": "^3.5.0"
   },
   "dependencies": {
-    "node-uuid": "^1.4.7",
+    "localforage": "^1.4.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
-    "redux": "^3.3.1"
+    "redux": "^3.3.1",
+    "uuid": "^2.0.1"
   }
 }

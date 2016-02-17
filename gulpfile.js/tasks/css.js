@@ -17,7 +17,7 @@ var isProduction = process.env.NODE_ENV === 'production';
 
 var cssTask = function () {
   return gulp.src(paths.src)
-    .pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
+    .pipe(gulpif(!isProduction, sourcemaps.init()))
     .pipe(sass(config.tasks.css.sass))
     .on('error', sass.logError)
     .pipe(autoprefixer(config.tasks.css.autoprefixer))

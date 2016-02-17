@@ -10,7 +10,8 @@
       "server": {
         "baseDir": "./webapp/public"
       },
-      "notify": false
+      "notify": false,
+      "online": false
     },
 
     "css": {

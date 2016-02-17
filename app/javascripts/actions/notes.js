@@ -1,4 +1,4 @@
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 /**
  * Actions Types
@@ -7,6 +7,14 @@ var uuid = require('node-uuid');
 var CREATE_NOTE = 'CREATE_NOTE';
 var UPDATE_NOTE = 'UPDATE_NOTE';
 var DELETE_NOTE = 'DELETE_NOTE';
+
+var isV4 = function(id) {
+  if(typeof id !== 'string') {
+    return false;
+  }
+
+  return /^[a-z0-9]{8}-[a-z0-9]{4}-4[a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(id);
+};
 
 var createNote = function(text) {
   if(typeof text !== 'string') {
@@ -23,7 +31,7 @@ var createNote = function(text) {
 };
 
 var updateNote = function(updatedNote) {
-  if( (typeof updatedNote !== 'object') || (typeof updatedNote.id !== 'string') ) {
+  if( (typeof updatedNote !== 'object') || (!isV4(updatedNote.id)) ) {
     throw new Error('updateNote(): wrong param: ' + JSON.stringify(updatedNote));
   }
 
@@ -34,7 +42,7 @@ var updateNote = function(updatedNote) {
 };
 
 var deleteNote = function(id) {
-  if(typeof id !== 'string') {
+  if(!isV4(id)) {
     throw new Error('deleteNote(): wrong param: ' + JSON.stringify(id));
   }
 
