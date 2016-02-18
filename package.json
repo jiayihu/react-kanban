@@ -11,7 +11,7 @@
     "clean": "rm -rf webapp/public && mkdir webapp/public ",
     "dev": "gulp",
     "production": "npm run clean && NODE_ENV=production gulp production",
-    "test": "mocha test"
+    "test": "mocha --compilers js:babel-core/register"
   },
   "author": "jiayi hu",
   "license": "MIT",
