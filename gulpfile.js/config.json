@@ -58,10 +58,6 @@
       "extensions": ["js", "jsx"]
     },
 
-    "server": {
-      "app": "./webapp/server.js"
-    },
-
     "static": {
       "src": "static",
       "dest": "./"
