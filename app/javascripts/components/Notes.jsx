@@ -4,12 +4,13 @@ var Note = require('./Note.jsx');
 var Notes = React.createClass({
   render: function() {
     var notes = this.props.notes.map(function(note) {
+      console.log(this.props);
       return (
         <Note
           key={note.id}
+          onDeleteNote={this.props.onDeleteNote.bind(null, note.id)}
+          onEditNote={this.props.onEditNote}
           text={note.text}
-          onDelete={this.props.onDelete.bind(null, note.id)}
-          onEdit={this.props.onEdit.bind(null, note.id)}
         />
       );
     }.bind(this));

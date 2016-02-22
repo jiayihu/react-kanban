@@ -1,6 +1,6 @@
 var createStore = require('redux').createStore;
 var applyMiddleware = require('redux').applyMiddleware;
-var reducer = require('./reducers/notes');
+var rootReducer = require('./reducers');
 
 var logger = function(Store) {
   return function(next) {
@@ -18,8 +18,11 @@ var logger = function(Store) {
 };
 
 module.exports = function(initialState) {
+  initialState = initialState || {};
+  console.log(initialState);
+
   return createStore(
-    reducer,
+    rootReducer,
     initialState,
     applyMiddleware(logger)
   );

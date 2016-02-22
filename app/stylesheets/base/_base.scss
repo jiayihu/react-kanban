@@ -4,12 +4,11 @@
 
 body {
   background-attachment: fixed;
-  background-color: $gray-dark;
+  background-color: lighten($gray-light, 10%);
   color: $text;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  text-align: center;
 }
 
 a {
@@ -27,11 +26,13 @@ p {
   font-weight: 300;
 }
 
-h1 {
-  font-family: Source Code Pro;
-  font-weight: 300;
+h1,
+h2 {
   margin: 0;
-  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.2em;
 }
 
 img {
@@ -39,25 +40,23 @@ img {
 }
 
 button {
-  background-color: $primary;
+  background-color: $gray;
   border: 0;
   border-radius: 2px;
-  box-shadow: 0 2px 3px $gray-light;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
   color: #fff;
   padding: .5em 1em;
   transition: all .3s ease-out;
 }
 
 button:focus {
-  background-color: $primary-dark;
-  box-shadow: 0 2px 4px $gray;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
   outline: 0;
 }
 
 input {
   border: 0;
-  border-bottom: 2px solid $accent;
-  padding: 0.3em;
+  padding: .3em;
 
   &:focus {
     outline: none;

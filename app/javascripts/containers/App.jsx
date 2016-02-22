@@ -2,26 +2,27 @@
 
 var React = require('react');
 
-var actions = require('../actions/notes');
+var laneActions = require('../actions/lanes');
+var notesActions = require('../actions/notes');
 var connect = require('react-redux').connect;
-var Notes = require('../components/Notes.jsx');
+var Lanes = require('../components/Lanes.jsx');
 
 var App = React.createClass({
   render: function() {
     return (
       <div className="react-kanban">
-        <div className="header">
-          <h1>React.js Kanban</h1>
-        </div>
-        <Notes
-          notes={this.props.notes}
-          onDelete={this.props.onDelete}
-          onEdit={this.props.onEdit}
-        />
+        <h1 className="app-title">React.js Kanban</h1>
         <button
-          onClick={this.props.onCreate}>
-          Add note
+          className="add-lane"
+          onClick={this.props.onCreateLane}>
+          +
         </button>
+        <Lanes
+          lanes={this.props.lanes}
+          onCreateNote={this.props.onCreateNote}
+          onDeleteNote={this.props.onDeleteNote}
+          onEditNote={this.props.onEditNote}
+        />
       </div>
     );
   }
@@ -29,25 +30,31 @@ var App = React.createClass({
 
 var mapStateToProps = function(state) {
   return {
-    notes: state
+    lanes: state.lanes
   };
 };
 
 var mapDispatchToProps = function(dispatch) {
   return {
-    onCreate: function() {
-      dispatch( actions.createNote('New task') );
+    onCreateLane: function() {
+      dispatch( laneActions.createLane('Active') );
     },
 
-    onDelete: function(id) {
-      dispatch( actions.deleteNote(id) );
+    onCreateNote: function() {
+      dispatch( notesActions.createNote('New note') );
     },
 
-    onEdit: function(id, value) {
-      dispatch( actions.updateNote({
+    onDeleteNote: function(id) {
+      dispatch( notesActions.deleteNote(id) );
+    },
+
+    onEditNote: function(id, value) {
+      var updatedNote = {
         id: id,
         text: value
-      }) );
+      };
+
+      dispatch( notesActions.updateNote(updatedNote) );
     }
   };
 };

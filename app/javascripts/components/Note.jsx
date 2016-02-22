@@ -46,6 +46,7 @@ var Note = React.createClass({
             }
           }.bind(this)}
           autoFocus
+          className="note--edit"
           defaultValue={this.props.text}
           onBlur={this.handleFinishEdit}
           onKeyPress={this.handleFinishEdit}
@@ -57,9 +58,11 @@ var Note = React.createClass({
   renderNote: function() {
     return (
       <li className="note">
-        <span onClick={this.handleEdit}>
-          {this.props.text}
-        </span>
+        <input
+          onClick={this.handleEdit}
+          defaultValue={this.props.text}
+          readOnly
+        />
         <span className="note__remove" onClick={this.handleDelete}>
           &times;
         </span>

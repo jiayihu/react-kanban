@@ -1,3 +1,4 @@
+var helpers = require('../helpers');
 var uuid = require('uuid');
 
 /**
@@ -8,6 +9,11 @@ var CREATE_NOTE = 'CREATE_NOTE';
 var UPDATE_NOTE = 'UPDATE_NOTE';
 var DELETE_NOTE = 'DELETE_NOTE';
 
+/**
+ * Checks if string is valid v4 id
+ * @param  {string} id Id to be checked
+ * @return {boolean}
+ */
 var isV4 = function(id) {
   if(typeof id !== 'string') {
     return false;
@@ -16,9 +22,14 @@ var isV4 = function(id) {
   return /^[a-z0-9]{8}-[a-z0-9]{4}-4[a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(id);
 };
 
+/**
+ * Returns the action to create a note
+ * @param  {string} text Note text
+ * @return {object}
+ */
 var createNote = function(text) {
   if(typeof text !== 'string') {
-    throw new Error('createNote(): wrong param: ' + JSON.stringify(text));
+    helpers.makeError('params', text);
   }
 
   return {
@@ -30,9 +41,15 @@ var createNote = function(text) {
   };
 };
 
+/**
+ * Returns the action to update a note
+ * @param  {object} updatedNote Object with note properties to update. It must
+ * have a valid id.
+ * @return {object}
+ */
 var updateNote = function(updatedNote) {
   if( (typeof updatedNote !== 'object') || (!isV4(updatedNote.id)) ) {
-    throw new Error('updateNote(): wrong param: ' + JSON.stringify(updatedNote));
+    helpers.makeError('params', updatedNote);
   }
 
   return {
@@ -41,9 +58,14 @@ var updateNote = function(updatedNote) {
   };
 };
 
+/**
+ * Returns the action to delete a note
+ * @param  {string} id Note id
+ * @return {object}
+ */
 var deleteNote = function(id) {
   if(!isV4(id)) {
-    throw new Error('deleteNote(): wrong param: ' + JSON.stringify(id));
+    helpers.makeError('params', id);
   }
 
   return {

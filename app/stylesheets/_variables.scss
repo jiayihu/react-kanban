@@ -1,9 +1,11 @@
 // Colors
-$primary: #3eaca8;
-$primary-dark: darken($primary, 30%);
+$primary: #00BCD4;
+$primary-dark: darken($primary, 10%);
 $primary-light: lighten($primary, 20%);
-$accent: #a2d4ab;
-$accent-secondary: #e5eec1;
+$accent: #a6206a;
+$accent-sec: #ec1c4b;
+$accent-ter: #f16a43;
+$accent-qua: #f7d969;
 
 $gray: #727272;
 $gray-dark: #5a5050;
@@ -13,7 +15,7 @@ $white: #fff;
 $white-opacity: rgba(#fff, .54);
 
 $text: $gray-dark;
-$error: red;
+$error: $accent-sec;
 
 // Media queries breakpoints
 $screen-phone: 480px;

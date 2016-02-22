@@ -1,20 +1,6 @@
 var types = require('../actions/notes').types;
-var uuid = require('uuid');
 
-var initialState = [
-  {
-    id: uuid.v4(),
-    text: 'Learn Webpack'
-  },
-  {
-    id: uuid.v4(),
-    text: 'Learn React'
-  },
-  {
-    id: uuid.v4(),
-    text: 'Do laundry'
-  }
-];
+var initialState = [];
 
 var reducer = function(state, action) {
   state = state || initialState;

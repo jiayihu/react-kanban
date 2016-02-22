@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var actions = require('../app/javascripts/actions/notes');
 var uuid = require('uuid');
 
-describe('actions', function() {
+describe('notes actions', function() {
   it('should create an action to add a note', function() {
     var text = 'Create task';
     var expectedAction = {
