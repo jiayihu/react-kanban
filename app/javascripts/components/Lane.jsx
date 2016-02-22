@@ -9,6 +9,10 @@ var Lane = React.createClass({
     this.props.onCreateNote(this.props.lane.id);
   },
 
+  handleDeleteNote: function(noteId) {
+    this.props.onDeleteNote(this.props.lane.id, noteId);
+  },
+
   render: function() {
     var lane = this.props.lane;
     var allNotes = this.props.allNotes;
@@ -17,14 +21,20 @@ var Lane = React.createClass({
         return note.id === id;
       });
     });
-    console.log('laneNotes: %o', laneNotes);
+
+    //Remove 'undefined' notes, which are included if for some reason a note is
+    //not found by its id. For example when the note is deleted by not detached
+    //from the lane
+    laneNotes = laneNotes.filter(function(note) {
+      return note;
+    });
 
     return (
       <div className="lane">
         <h2 className="lane__name">{lane.name}</h2>
         <Notes
           notes={laneNotes}
-          onDeleteNote={this.props.onDeleteNote}
+          onDeleteNote={this.handleDeleteNote}
           onEditNote={this.props.onEditNote}
         />
       <button className="add-note" onClick={this.handleClick} >+ note</button>
@@ -43,13 +53,13 @@ var mapDispatchToProps = function(dispatch) {
   return {
     onCreateNote: function(laneId) {
       var newNote = notesActions.createNote('New note');
-      // @FIXME Reduce to one dispatch 
       dispatch(newNote);
       dispatch( lanesActions.attachToLane(laneId, newNote.payload.id) );
     },
 
-    onDeleteNote: function(id) {
-      dispatch( notesActions.deleteNote(id) );
+    onDeleteNote: function(laneId, noteId) {
+      dispatch( notesActions.deleteNote(noteId) );
+      dispatch( lanesActions.detachFromLane(laneId, noteId) );
     },
 
     onEditNote: function(id, value) {

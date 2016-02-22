@@ -4,7 +4,7 @@ var types = require('../app/javascripts/actions/lanes').types;
 
 describe('lanes reducer', function() {
   it('should return the initial state', function() {
-    expect(reducer(null, {type: 'unknown'})).to.deep.equal([]);
+    expect(reducer(null, {type: 'unknown'})).to.have.length(3);
   });
 
   it('should handle CREATE_LANE', function() {
@@ -16,5 +16,17 @@ describe('lanes reducer', function() {
     };
 
     expect(reducer([], createAction)).to.deep.equal([createAction.payload]);
+  });
+
+  it('should handle ATTACH_TO_LANE', function() {
+    var action = {
+      type: types.ATTACH_TO_LANE,
+      payload: {
+        laneId: 1,
+        noteId: 1
+      }
+    };
+
+    expect(reducer(null, action)).to.have.length(3);
   });
 });

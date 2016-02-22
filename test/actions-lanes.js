@@ -1,12 +1,13 @@
 var expect = require('chai').expect;
 var actions = require('../app/javascripts/actions/lanes');
+var types = actions.types;
 var uuid = require('uuid');
 
 describe('lanes actions', function() {
   it('should return an action to create a lane', function() {
     var name = 'Active';
     var expectedAction = {
-      type: 'CREATE_LANE',
+      type: types.CREATE_LANE,
       payload: {
         id: uuid(),
         name: name
@@ -19,9 +20,35 @@ describe('lanes actions', function() {
     expect(actions.createLane(name).payload.notes).to.be.an('array');
   });
 
-  it('should throw an error', function() {
-    var invalidParam = {};
+  it('should return an action to attach a note to a lane', function() {
+    var validId = uuid.v4();
+    var expectedAction = {
+      type: types.ATTACH_TO_LANE,
+      payload: {
+        laneId: validId,
+        noteId: validId
+      }
+    };
 
-    expect(actions.createLane.bind(null, invalidParam)).to.throw(Error);
+    expect(actions.attachToLane(validId, validId)).to.deep.equal(expectedAction);
+  });
+
+  it('should return an action to detach a note from a lane', function() {
+    var validId = uuid.v4();
+    var expectedAction = {
+      type: types.DETACH_FROM_LANE,
+      payload: {
+        laneId: validId,
+        noteId: validId
+      }
+    };
+
+    expect(actions.detachFromLane(validId, validId)).to.deep.equal(expectedAction);
+  });
+
+  it('should throw an error', function() {
+    expect(actions.createLane.bind(null, {})).to.throw(Error);
+    expect(actions.attachToLane.bind(null, 1, 'invalidId')).to.throw(Error);
+    expect(actions.detachFromLane.bind(null, 1, 'invalidId')).to.throw(Error);
   });
 });

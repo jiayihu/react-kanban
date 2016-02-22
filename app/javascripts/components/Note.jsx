@@ -2,7 +2,7 @@ var React = require('react');
 
 var Note = React.createClass({
   handleDelete: function() {
-    this.props.onDelete();
+    this.props.onDeleteNote();
   },
 
   handleEdit: function() {
@@ -18,8 +18,8 @@ var Note = React.createClass({
 
     var value = e.target.value;
 
-    if(this.props.onEdit && value.trim().length) {
-      this.props.onEdit(value);
+    if(this.props.onEditNote && value.trim().length) {
+      this.props.onEditNote(value);
     }
 
 

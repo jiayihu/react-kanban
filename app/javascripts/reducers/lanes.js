@@ -39,6 +39,23 @@ module.exports = function(state, action) {
 
         return lane;
       });
+
+    case types.DETACH_FROM_LANE:
+      var laneId = action.payload.laneId;
+      var noteId = action.payload.noteId;
+
+      return state.map(function(lane) {
+        if(lane.id === laneId) {
+          return Object.assign({}, lane, {
+            notes: lane.notes.filter(function(id) {
+              return id !== noteId;
+            })
+          });
+        }
+
+        return lane;
+      });
+
     default:
       return state;
   }

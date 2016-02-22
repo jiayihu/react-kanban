@@ -31,8 +31,10 @@
   max-width: 15em;
   min-width: 12.5em;
 
-  &:not(:first-child) {
-    border-left-width: 0;
+  @media(min-width: $screen-phone) {
+    &:not(:first-child) {
+      border-left-width: 0;
+    }
   }
 
   &__name {
