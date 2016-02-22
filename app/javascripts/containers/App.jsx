@@ -3,7 +3,6 @@
 var React = require('react');
 
 var laneActions = require('../actions/lanes');
-var notesActions = require('../actions/notes');
 var connect = require('react-redux').connect;
 var Lanes = require('../components/Lanes.jsx');
 
@@ -19,9 +18,6 @@ var App = React.createClass({
         </button>
         <Lanes
           lanes={this.props.lanes}
-          onCreateNote={this.props.onCreateNote}
-          onDeleteNote={this.props.onDeleteNote}
-          onEditNote={this.props.onEditNote}
         />
       </div>
     );
@@ -38,23 +34,6 @@ var mapDispatchToProps = function(dispatch) {
   return {
     onCreateLane: function() {
       dispatch( laneActions.createLane('Active') );
-    },
-
-    onCreateNote: function() {
-      dispatch( notesActions.createNote('New note') );
-    },
-
-    onDeleteNote: function(id) {
-      dispatch( notesActions.deleteNote(id) );
-    },
-
-    onEditNote: function(id, value) {
-      var updatedNote = {
-        id: id,
-        text: value
-      };
-
-      dispatch( notesActions.updateNote(updatedNote) );
     }
   };
 };

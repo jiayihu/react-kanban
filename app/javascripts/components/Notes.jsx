@@ -4,7 +4,6 @@ var Note = require('./Note.jsx');
 var Notes = React.createClass({
   render: function() {
     var notes = this.props.notes.map(function(note) {
-      console.log(this.props);
       return (
         <Note
           key={note.id}

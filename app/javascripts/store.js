@@ -19,7 +19,7 @@ var logger = function(Store) {
 
 module.exports = function(initialState) {
   initialState = initialState || {};
-  console.log(initialState);
+  console.log('initialState %o', initialState);
 
   return createStore(
     rootReducer,

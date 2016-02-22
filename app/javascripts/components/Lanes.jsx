@@ -7,11 +7,7 @@ module.exports = React.createClass({
       return (
         <Lane
           key={lane.id}
-          name={lane.name}
-          notes={lane.notes}
-          onCreateNote={this.props.onCreateNote}
-          onDeleteNote={this.props.onDeleteNote}
-          onEditNote={this.props.onEditNote}
+          lane={lane}
         />
       );
     }.bind(this));

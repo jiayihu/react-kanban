@@ -1,39 +1,21 @@
 var types = require('../actions/lanes').types;
 var uuid = require('uuid');
+
 var initialState = [
   {
     id: uuid.v4(),
     name: 'Todo',
-    notes: [
-      {
-        id: 1,
-        text: 'Write BDD code!'
-      },
-      {
-        id: 2,
-        text: 'Learn functional programming'
-      },
-      {
-        id: 3,
-        text: 'Hello world!'
-      }
-    ]
+    notes: []
   },
   {
     id: uuid.v4(),
     name: 'In Progress',
-    notes: [{
-      id: 1,
-      text: 'Write BDD code!'
-    }]
+    notes: []
   },
   {
     id: uuid.v4(),
     name: 'Review',
-    notes: [{
-      id: 1,
-      text: 'Fix UI bugs!'
-    }]
+    notes: []
   }
 ];
 
@@ -43,6 +25,20 @@ module.exports = function(state, action) {
   switch (action.type) {
     case types.CREATE_LANE:
       return state.concat(action.payload);
+
+    case types.ATTACH_TO_LANE:
+      var laneId = action.payload.laneId;
+      var noteId = action.payload.noteId;
+
+      return state.map(function(lane) {
+        if(lane.id === laneId) {
+          return Object.assign({}, lane, {
+            notes: lane.notes.concat(noteId)
+          });
+        }
+
+        return lane;
+      });
     default:
       return state;
   }
