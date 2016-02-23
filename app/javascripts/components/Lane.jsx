@@ -1,18 +1,10 @@
 var React = require('react');
-var Notes = require('./Notes.jsx');
+var Notes = require('./Notes.jsx'); //eslint-disable-line no-unused-vars
 var lanesActions = require('../actions/lanes');
 var notesActions = require('../actions/notes');
 var connect = require('react-redux').connect;
 
 var Lane = React.createClass({
-  handleClick: function() {
-    this.props.onCreateNote(this.props.lane.id);
-  },
-
-  handleDeleteNote: function(noteId) {
-    this.props.onDeleteNote(this.props.lane.id, noteId);
-  },
-
   render: function() {
     var lane = this.props.lane;
     var allNotes = this.props.allNotes;
@@ -34,10 +26,14 @@ var Lane = React.createClass({
         <h2 className="lane__name">{lane.name}</h2>
         <Notes
           notes={laneNotes}
-          onDeleteNote={this.handleDeleteNote}
+          onDeleteNote={this.props.onDeleteNote.bind(null, lane.id)}
           onEditNote={this.props.onEditNote}
         />
-      <button className="add-note" onClick={this.handleClick} >+ note</button>
+      <button
+        className="add-note"
+        onClick={this.props.onCreateNote.bind(null, lane.id)} >
+        + note
+      </button>
       </div>
     );
   }
@@ -62,9 +58,9 @@ var mapDispatchToProps = function(dispatch) {
       dispatch( lanesActions.detachFromLane(laneId, noteId) );
     },
 
-    onEditNote: function(id, value) {
+    onEditNote: function(noteId, value) {
       var updatedNote = {
-        id: id,
+        id: noteId,
         text: value
       };
 
