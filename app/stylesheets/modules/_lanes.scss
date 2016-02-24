@@ -30,6 +30,7 @@
   margin-top: .5em;
   max-width: 15em;
   min-width: 12.5em;
+  position: relative;
 
   @media(min-width: $screen-phone) {
     &:not(:first-child) {
@@ -43,5 +44,20 @@
     padding: .5em;
     padding-left: .5em;
     text-align: left;
+
+    .editing {
+      box-shadow: inset 0 -2px $accent-qua;
+    }
+  }
+
+  &__delete {
+    background-color: $gray;
+    height: 1em;
+    line-height: 1em;
+    padding: 0;
+    position: absolute;
+    right: .5em;
+    top: -.5em;
+    width: 1em;
   }
 }

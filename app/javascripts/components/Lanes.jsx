@@ -8,6 +8,8 @@ module.exports = React.createClass({
         <Lane
           key={lane.id}
           lane={lane}
+          onEditLane={this.props.onEditLane}
+          onDeleteLane={this.props.onDeleteLane}
         />
       );
     }.bind(this));

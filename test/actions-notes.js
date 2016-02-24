@@ -34,7 +34,7 @@ describe('notes actions', function() {
 
     expect(actions.updateNote.bind(null, invalidId)).to.throw(Error);
     expect(actions.updateNote.bind(null, invalidNote)).to.throw(Error);
-    expect(expectedAction).to.deep.equal(actions.updateNote(validNote));
+    expect(actions.updateNote(validNote)).to.deep.equal(expectedAction);
   });
 
   it('should check if id is v4 valid and create a delete action', function() {
@@ -48,6 +48,6 @@ describe('notes actions', function() {
     };
 
     expect(actions.deleteNote.bind(null, invalidId)).to.throw(Error);
-    expect(expectedAction).to.deep.equal(actions.deleteNote(validId));
+    expect(actions.deleteNote(validId)).to.deep.equal(expectedAction);
   });
 });

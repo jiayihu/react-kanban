@@ -1,16 +1,20 @@
 var React = require('react');
-var Note = require('./Note.jsx');
+var Note = require('./Note.jsx'); //eslint-disable-line no-unused-vars
+var Editable = require('./Editable.jsx'); //eslint-disable-line no-unused-vars
 
 var Notes = React.createClass({
   render: function() {
     var notes = this.props.notes.map(function(note) {
       return (
-        <Note
-          key={note.id}
-          onDeleteNote={this.props.onDeleteNote.bind(null, note.id)}
-          onEditNote={this.props.onEditNote.bind(null, note.id)}
-          text={note.text}
-        />
+        <Note  key={note.id}>
+          <Editable
+            editing={note.editing}
+            value={note.text}
+            onDelete={this.props.onDeleteNote.bind(null, note.id)}
+            onEdit={this.props.onEditNote.bind(null, note.id)}
+            onValueClick={this.props.onValueClick.bind(null, note.id)}
+          />
+        </Note>
       );
     }.bind(this));
 

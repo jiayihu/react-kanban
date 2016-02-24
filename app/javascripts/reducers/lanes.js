@@ -26,6 +26,20 @@ module.exports = function(state, action) {
     case types.CREATE_LANE:
       return state.concat(action.payload);
 
+    case types.UPDATE_LANE:
+      return state.map(function(lane) {
+        if(lane.id === action.payload.id) {
+          return Object.assign({}, lane, action.payload);
+        }
+
+        return lane;
+      });
+
+    case types.DELETE_LANE:
+      return state.filter(function(lane) {
+        return lane.id !== action.payload.id;
+      });
+
     case types.ATTACH_TO_LANE:
       var laneId = action.payload.laneId;
       var noteId = action.payload.noteId;
@@ -41,8 +55,8 @@ module.exports = function(state, action) {
       });
 
     case types.DETACH_FROM_LANE:
-      var laneId = action.payload.laneId;
-      var noteId = action.payload.noteId;
+      var laneId = action.payload.laneId; //eslint-disable-line no-redeclare
+      var noteId = action.payload.noteId; //eslint-disable-line no-redeclare
 
       return state.map(function(lane) {
         if(lane.id === laneId) {

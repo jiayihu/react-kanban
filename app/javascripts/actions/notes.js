@@ -36,6 +36,7 @@ var createNote = function(text) {
     type: CREATE_NOTE,
     payload: {
       id: uuid.v4(),
+      editing: false,
       text: text
     }
   };

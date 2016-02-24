@@ -14,9 +14,6 @@ var isV4 = function(id) {
   return /^[a-z0-9]{8}-[a-z0-9]{4}-4[a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(id);
 };
 
-var UPDATE_LANE = 'UPDATE_LANE';
-var DELETE_LANE = 'DELETE_LANE';
-
 var CREATE_LANE = 'CREATE_LANE';
 var createLane = function(name) {
   if(typeof name !== 'string') {
@@ -29,6 +26,32 @@ var createLane = function(name) {
       id: uuid.v4(),
       name: name,
       notes: []
+    }
+  };
+};
+
+var UPDATE_LANE = 'UPDATE_LANE';
+var updateLane = function(updatedLane) {
+  if( (typeof updatedLane !== 'object') || (!isV4(updatedLane.id)) ) {
+    helpers.makeError('params', updatedLane);
+  }
+
+  return {
+    type: UPDATE_LANE,
+    payload: updatedLane
+  };
+};
+
+var DELETE_LANE = 'DELETE_LANE';
+var deleteLane = function(id) {
+  if(!isV4(id)) {
+    helpers.makeError('params', id);
+  }
+
+  return {
+    type: DELETE_LANE,
+    payload: {
+      id: id
     }
   };
 };
@@ -72,6 +95,8 @@ module.exports = {
     DETACH_FROM_LANE: DETACH_FROM_LANE
   },
   createLane: createLane,
+  updateLane: updateLane,
+  deleteLane: deleteLane,
   attachToLane: attachToLane,
   detachFromLane: detachFromLane
 };

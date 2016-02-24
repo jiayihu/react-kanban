@@ -33,6 +33,35 @@ describe('lanes actions', function() {
     expect(actions.attachToLane(validId, validId)).to.deep.equal(expectedAction);
   });
 
+  it('should return an action to update a lane', function() {
+    var validId = uuid.v4();
+    var updatedLane = {
+      id: validId,
+      name: 'Text'
+    };
+    var expectedAction = {
+      type: types.UPDATE_LANE,
+      payload: {
+        id: validId,
+        name: 'Text'
+      }
+    };
+
+    expect(actions.updateLane(updatedLane)).to.deep.equal(expectedAction);
+  });
+
+  it('should create an action to delete the lane', function() {
+    var validId = uuid.v4();
+    var expectedAction = {
+      type: actions.types.DELETE_LANE,
+      payload: {
+        id: validId
+      }
+    };
+
+    expect(actions.deleteLane(validId)).to.deep.equal(expectedAction);
+  });
+
   it('should return an action to detach a note from a lane', function() {
     var validId = uuid.v4();
     var expectedAction = {
