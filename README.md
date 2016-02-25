@@ -4,6 +4,13 @@
 
 # Kanban Board built with React.js
 
+> Like [SurviveJS](http://survivejs.com) but a bit more fancy and with Redux.
+
 ![Screenshot](https://raw.githubusercontent.com/jiayihu/react-kanban/master/screenshot.png)
 
-> Like [SurviveJS](http://survivejs.com) but a bit more fancy and with Redux.
+## Differences from Survive.js web application
+
+- Tests with [Mocha](http://mochajs.org/)
+- Cooler UI :dizzy:
+- [Redux](https://github.com/reactjs/redux) instead of [Alt](http://alt.js.org)
+- React.js animations :question:
