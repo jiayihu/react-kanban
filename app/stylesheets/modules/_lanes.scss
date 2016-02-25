@@ -51,7 +51,10 @@
   }
 
   &__delete {
-    background-color: $gray;
+    background-color: $white;
+    border: 1px solid lighten($gray-light, 10%);
+    box-shadow: none;
+    color: $gray-light;
     height: 1em;
     line-height: 1em;
     padding: 0;

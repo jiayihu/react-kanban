@@ -1,11 +1,20 @@
 var React = require('react');
 
-var Note = React.createClass({
+module.exports = React.createClass({
   render: function() {
-    return (
-      <li className="note" > {this.props.children} </li>
+    var connectDragSource = this.props.connectDragSource;
+    var connectDropTarget = this.props.connectDropTarget;
+    var isDragging = this.props.isDragging;
+
+    return connectDragSource(
+      connectDropTarget(
+        <li
+          style={{
+            opacity: isDragging? 0 : 1
+          }}
+          className="note" >
+          {this.props.children}
+        </li>)
     );
   }
 });
-
-module.exports = Note;

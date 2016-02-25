@@ -1,5 +1,5 @@
 var React = require('react');
-var Lane = require('./Lane.jsx');
+var Lane = require('../containers/Lane.jsx');
 
 module.exports = React.createClass({
   render: function() {

@@ -75,6 +75,19 @@ describe('lanes actions', function() {
     expect(actions.detachFromLane(validId, validId)).to.deep.equal(expectedAction);
   });
 
+  it('should return an action to move a note in the lane', function() {
+    var validId = uuid.v4();
+    var expectedAction = {
+      type: types.MOVE,
+      payload: {
+        sourceId: validId,
+        targetId: validId
+      }
+    };
+
+    expect(actions.move(validId, validId)).to.deep.equal(expectedAction);
+  });
+
   it('should throw an error', function() {
     expect(actions.createLane.bind(null, {})).to.throw(Error);
     expect(actions.attachToLane.bind(null, 1, 'invalidId')).to.throw(Error);

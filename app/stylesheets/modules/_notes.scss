@@ -18,13 +18,14 @@
 
 .note {
   border-left: 2px solid $primary;
+  cursor: move;
   margin: .725em 0;
   padding: .5em 1em;
   position: relative;
 
   input {
     border-bottom: 2px solid rgba(0, 0, 0, 0);
-    cursor: pointer;
+    cursor: text;
   }
 
   .editing {

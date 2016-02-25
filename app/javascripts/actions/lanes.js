@@ -86,17 +86,34 @@ var detachFromLane = function(laneId, noteId) {
   };
 };
 
+var MOVE = 'MOVE';
+var move = function(sourceId, targetId) {
+  if( (!isV4(sourceId)) || (!isV4(targetId)) ) {
+    helpers.makeError('params', {sourceId: sourceId, targetId: targetId});
+  }
+
+  return {
+    type: MOVE,
+    payload: {
+      sourceId: sourceId,
+      targetId: targetId
+    }
+  };
+};
+
 module.exports = {
   types: {
     CREATE_LANE: CREATE_LANE,
     UPDATE_LANE: UPDATE_LANE,
     DELETE_LANE: DELETE_LANE,
     ATTACH_TO_LANE: ATTACH_TO_LANE,
-    DETACH_FROM_LANE: DETACH_FROM_LANE
+    DETACH_FROM_LANE: DETACH_FROM_LANE,
+    MOVE: MOVE
   },
   createLane: createLane,
   updateLane: updateLane,
   deleteLane: deleteLane,
   attachToLane: attachToLane,
-  detachFromLane: detachFromLane
+  detachFromLane: detachFromLane,
+  move: move
 };

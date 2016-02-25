@@ -6,7 +6,11 @@ var Notes = React.createClass({
   render: function() {
     var notes = this.props.notes.map(function(note) {
       return (
-        <Note  key={note.id}>
+        <Note
+          id={note.id}
+          key={note.id}
+          onMoveNote={this.props.onMoveNote}
+        >
           <Editable
             editing={note.editing}
             value={note.text}

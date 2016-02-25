@@ -1,5 +1,6 @@
 var types = require('../actions/lanes').types;
 var uuid = require('uuid');
+var update = require('react-addons-update');
 
 var initialState = [
   {
@@ -43,8 +44,18 @@ module.exports = function(state, action) {
     case types.ATTACH_TO_LANE:
       var laneId = action.payload.laneId;
       var noteId = action.payload.noteId;
+      var noteIndex;
 
       return state.map(function(lane) {
+        noteIndex = lane.notes.indexOf(noteId);
+        if(~noteIndex) {
+          return Object.assign({}, lane, {
+            notes: lane.notes.filter(function(id) {
+              return id !== noteId;
+            })
+          });
+        }
+
         if(lane.id === laneId) {
           return Object.assign({}, lane, {
             notes: lane.notes.concat(noteId)
@@ -69,6 +80,55 @@ module.exports = function(state, action) {
 
         return lane;
       });
+
+    case types.MOVE:
+      var sourceId = action.payload.sourceId;
+      var targetId = action.payload.targetId;
+      var sourceLane = state.filter(function(lane) {
+        return ~lane.notes.indexOf(sourceId);
+      })[0];
+      var targetLane = state.filter(function(lane) {
+        return ~lane.notes.indexOf(targetId);
+      })[0];
+      var sourceNoteIndex = sourceLane.notes.indexOf(sourceId);
+      var targetNoteIndex = targetLane.notes.indexOf(targetId);
+
+      if(sourceLane.id === targetLane.id) {
+        return state.map(function(lane) {
+          if(lane.id === sourceLane.id) {
+            return Object.assign({}, lane, {
+              notes: update(sourceLane.notes, {
+                $splice: [
+                  [sourceNoteIndex, 1],
+                  [targetNoteIndex, 0, sourceId]
+                ]
+              })
+            });
+          }
+
+          return lane;
+        });
+      } else {
+        return state.map(function(lane) {
+          if(lane.id === sourceLane.id) {
+            return Object.assign({}, lane, {
+              notes: update(lane.notes, {
+                $splice: [[sourceNoteIndex, 1]]
+              })
+            });
+          }
+
+          if(lane.id === targetLane.id) {
+            return Object.assign({}, lane, {
+              notes: update(lane.notes, {
+                $splice: [[targetNoteIndex, 0, sourceId]]
+              })
+            });
+          }
+
+          return lane;
+        });
+      }
 
     default:
       return state;

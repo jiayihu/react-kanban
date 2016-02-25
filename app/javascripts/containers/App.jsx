@@ -6,6 +6,9 @@ var lanesActions = require('../actions/lanes');
 var connect = require('react-redux').connect;
 var Lanes = require('../components/Lanes.jsx');
 
+var HTML5Backend = require('react-dnd-html5-backend');
+var DragDropContext = require('react-dnd').DragDropContext;
+
 var App = React.createClass({
   render: function() {
     return (
@@ -59,4 +62,6 @@ var mapDispatchToProps = function(dispatch) {
   };
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(App);
+module.exports = DragDropContext(HTML5Backend)(
+  connect(mapStateToProps, mapDispatchToProps)(App)
+);
