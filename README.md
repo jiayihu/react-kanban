@@ -6,4 +6,4 @@
 
 ![Screenshot](https://raw.githubusercontent.com/jiayihu/react-kanban/master/screenshot.png)
 
-## Work still in progress
+> Like [SurviveJS](http://survivejs.com) but a bit more fancy and with Redux.
