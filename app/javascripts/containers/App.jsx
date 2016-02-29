@@ -10,6 +10,7 @@ var HTML5Backend = require('react-dnd-html5-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
 
 var App = React.createClass({
+
   render: function() {
     return (
       <div className="react-kanban">
@@ -17,7 +18,13 @@ var App = React.createClass({
         <button
           className="add-lane"
           onClick={this.props.onCreateLane}>
-          +
+          + Lane
+        </button>
+        <button
+          className="reset-store"
+          onClick={this.props.onReset}
+          >
+          Reset persisted store
         </button>
         <Lanes
           lanes={this.props.lanes}

@@ -9,6 +9,11 @@ var localStore = localforage.createInstance({
   name: 'kanban'
 });
 
+var onReset = function() {
+  localStore.clear();
+  window.location.reload();
+};
+
 localStore.getItem('state')
   .then(function(value) {
     return configStore(value);
@@ -18,9 +23,11 @@ localStore.getItem('state')
   })
   .then(function(store) {
     ReactDOM.render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
+      <div>
+        <Provider store={store}>
+          <App onReset={onReset} />
+        </Provider>
+      </div>,
       document.querySelector('.app')
     );
 
