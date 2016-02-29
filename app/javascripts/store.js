@@ -17,13 +17,14 @@ var logger = function(Store) {
   };
 };
 
+var reduxDebug = window.devToolsExtension ? window.devToolsExtension : function(f) {return f;};
+
 module.exports = function(initialState) {
   initialState = initialState || {};
-  console.log('initialState %o', initialState);
 
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(logger)
+    reduxDebug(applyMiddleware(logger))
   );
 };

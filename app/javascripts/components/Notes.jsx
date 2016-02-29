@@ -1,5 +1,5 @@
 var React = require('react');
-var Note = require('./Note.jsx'); //eslint-disable-line no-unused-vars
+var Note = require('../containers/Note.jsx'); //eslint-disable-line no-unused-vars
 var Editable = require('./Editable.jsx'); //eslint-disable-line no-unused-vars
 
 var Notes = React.createClass({

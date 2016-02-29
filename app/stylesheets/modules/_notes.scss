@@ -17,6 +17,9 @@
 }
 
 .note {
+  background-image: url('../images/drag-pattern.png');
+  background-position: left center;
+  background-repeat: no-repeat;
   border-left: 2px solid $primary;
   cursor: move;
   margin: .725em 0;
