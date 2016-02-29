@@ -23,9 +23,10 @@ module.exports = React.createClass({
         return note; //filter out undefined notes
       });
     var connectDragSource = this.props.connectDragSource;
+    var connectDragPreview = this.props.connectDragPreview;
     var connectDropTarget = this.props.connectDropTarget;
 
-    return connectDragSource(
+    return connectDragPreview(
       connectDropTarget(
         <div className="lane">
           <h2 className="lane__name">
@@ -39,6 +40,11 @@ module.exports = React.createClass({
             className="lane__delete"
             onClick={this.handleDeleteLane.bind(null, lane.id, lane.notes)}
           >-</button>
+          {
+            connectDragSource(
+              <button className="lane__drag" />
+            )
+          }
           </h2>
           <Notes
             notes={laneNotes}

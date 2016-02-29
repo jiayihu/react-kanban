@@ -36,6 +36,7 @@ var laneTarget = {
 var collectDragSource = function(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   };
 };
