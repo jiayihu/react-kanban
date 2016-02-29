@@ -7,5 +7,5 @@
 ![Screenshot](https://raw.githubusercontent.com/jiayihu/react-kanban/master/screenshot.png)
 
 ## TODO
- - [ ] Draggable Lanes
+ - [x] Draggable Lanes
  - [ ] React.js animations

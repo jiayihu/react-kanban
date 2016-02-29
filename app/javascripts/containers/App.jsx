@@ -23,6 +23,7 @@ var App = React.createClass({
           lanes={this.props.lanes}
           onEditLane={this.props.onEditLane}
           onDeleteLane={this.props.onDeleteLane}
+          onMoveLane={this.props.onMoveLane}
         />
       </div>
     );
@@ -58,6 +59,10 @@ var mapDispatchToProps = function(dispatch) {
 
     onDeleteLane: function(laneId) {
       dispatch( lanesActions.deleteLane(laneId) );
+    },
+
+    onMoveLane: function(sourceId, targetId) {
+      dispatch( lanesActions.move('lane', sourceId, targetId) );
     }
   };
 };

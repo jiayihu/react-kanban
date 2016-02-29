@@ -78,14 +78,14 @@ describe('lanes actions', function() {
   it('should return an action to move a note in the lane', function() {
     var validId = uuid.v4();
     var expectedAction = {
-      type: types.MOVE,
+      type: types.MOVE_NOTE,
       payload: {
         sourceId: validId,
         targetId: validId
       }
     };
 
-    expect(actions.move(validId, validId)).to.deep.equal(expectedAction);
+    expect(actions.move('note', validId, validId)).to.deep.equal(expectedAction);
   });
 
   it('should throw an error', function() {

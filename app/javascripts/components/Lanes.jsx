@@ -10,6 +10,7 @@ module.exports = React.createClass({
           lane={lane}
           onEditLane={this.props.onEditLane}
           onDeleteLane={this.props.onDeleteLane}
+          onMoveLane={this.props.onMoveLane}
         />
       );
     }.bind(this));

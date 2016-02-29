@@ -22,35 +22,38 @@ module.exports = React.createClass({
       .filter(function(note) {
         return note; //filter out undefined notes
       });
+    var connectDragSource = this.props.connectDragSource;
     var connectDropTarget = this.props.connectDropTarget;
 
-    return connectDropTarget(
-      <div className="lane">
-        <h2 className="lane__name">
-          <Editable
-            editing={lane.editing}
-            value={lane.name}
-            onEdit={this.props.onEditLane.bind(null, lane.id)}
-            onValueClick={this.props.onEditLane.bind(null, lane.id)}
+    return connectDragSource(
+      connectDropTarget(
+        <div className="lane">
+          <h2 className="lane__name">
+            <Editable
+              editing={lane.editing}
+              value={lane.name}
+              onEdit={this.props.onEditLane.bind(null, lane.id)}
+              onValueClick={this.props.onEditLane.bind(null, lane.id)}
+            />
+          <button
+            className="lane__delete"
+            onClick={this.handleDeleteLane.bind(null, lane.id, lane.notes)}
+          >-</button>
+          </h2>
+          <Notes
+            notes={laneNotes}
+            onDeleteNote={this.props.onDeleteNote.bind(null, lane.id)}
+            onEditNote={this.props.onEditNote}
+            onValueClick={this.props.onEditNote}
+            onMoveNote={this.props.onMoveNote}
           />
         <button
-          className="lane__delete"
-          onClick={this.handleDeleteLane.bind(null, lane.id, lane.notes)}
-        >-</button>
-        </h2>
-        <Notes
-          notes={laneNotes}
-          onDeleteNote={this.props.onDeleteNote.bind(null, lane.id)}
-          onEditNote={this.props.onEditNote}
-          onValueClick={this.props.onEditNote}
-          onMoveNote={this.props.onMoveNote}
-        />
-      <button
-        className="add-note"
-        onClick={this.props.onCreateNote.bind(null, lane.id)} >
-        + note
-      </button>
-      </div>
+          className="add-note"
+          onClick={this.props.onCreateNote.bind(null, lane.id)} >
+          + note
+        </button>
+        </div>
+      )
     );
   }
 });

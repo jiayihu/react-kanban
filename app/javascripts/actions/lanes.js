@@ -86,14 +86,19 @@ var detachFromLane = function(laneId, noteId) {
   };
 };
 
-var MOVE = 'MOVE';
-var move = function(sourceId, targetId) {
-  if( (!isV4(sourceId)) || (!isV4(targetId)) ) {
-    helpers.makeError('params', {sourceId: sourceId, targetId: targetId});
+var MOVE_NOTE = 'MOVE_NOTE';
+var MOVE_LANE = 'MOVE_LANE';
+var move = function(target, sourceId, targetId) {
+  if( (typeof target !== 'string') || (!isV4(sourceId)) || (!isV4(targetId)) ) {
+    helpers.makeError('params', {
+      target: target,
+      sourceId: sourceId,
+      targetId: targetId
+    });
   }
 
   return {
-    type: MOVE,
+    type: target === 'note'? MOVE_NOTE : MOVE_LANE,
     payload: {
       sourceId: sourceId,
       targetId: targetId
@@ -108,7 +113,8 @@ module.exports = {
     DELETE_LANE: DELETE_LANE,
     ATTACH_TO_LANE: ATTACH_TO_LANE,
     DETACH_FROM_LANE: DETACH_FROM_LANE,
-    MOVE: MOVE
+    MOVE_NOTE: MOVE_NOTE,
+    MOVE_LANE: MOVE_LANE
   },
   createLane: createLane,
   updateLane: updateLane,

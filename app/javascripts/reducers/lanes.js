@@ -81,9 +81,10 @@ module.exports = function(state, action) {
         return lane;
       });
 
-    case types.MOVE:
+    case types.MOVE_NOTE:
       var sourceId = action.payload.sourceId;
       var targetId = action.payload.targetId;
+      console.log(sourceId, targetId);
       var sourceLane = state.filter(function(lane) {
         return ~lane.notes.indexOf(sourceId);
       })[0];
@@ -129,6 +130,26 @@ module.exports = function(state, action) {
           return lane;
         });
       }
+
+    case types.MOVE_LANE:
+      var sourceId = action.payload.sourceId; //eslint-disable-line no-redeclare
+      var targetId = action.payload.targetId; //eslint-disable-line no-redeclare
+      var sourceLane = state.find(function(lane) { //eslint-disable-line no-redeclare
+        return lane.id === sourceId;
+      });
+      var sourceLaneIndex = state.findIndex(function(lane) {
+        return lane.id === sourceId;
+      });
+      var targetLaneIndex = state.findIndex(function(lane) {
+        return lane.id === targetId;
+      });
+
+      return update(state, {
+        $splice: [
+          [sourceLaneIndex, 1],
+          [targetLaneIndex, 0, sourceLane]
+        ]
+      });
 
     default:
       return state;

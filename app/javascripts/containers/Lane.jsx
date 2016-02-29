@@ -2,20 +2,42 @@ var Lane = require('../components/Lane.jsx');
 var lanesActions = require('../actions/lanes');
 var notesActions = require('../actions/notes');
 var connect = require('react-redux').connect;
+var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
 var ItemTypes = require('../constants/itemTypes');
+
+var laneSource = {
+  beginDrag: function(props) {
+    var item = {
+      id: props.lane.id
+    };
+
+    return item;
+  },
+  isDragging: function(props, monitor) {
+    return props.id === monitor.getItem().id;
+  }
+};
 
 var laneTarget = {
   hover: function(targetProps, monitor) {
     var targetId = targetProps.lane.id;
     var sourceProps = monitor.getItem();
     var sourceId = sourceProps.id;
-
-    if(!targetProps.lane.notes.length) {
-      console.log(targetId, sourceId);
+    var sourceType = monitor.getItemType();
+    if((!targetProps.lane.notes.length) && sourceType === 'note') {
       targetProps.attachToLane(targetId, sourceId);
+    } else if( (targetId !== sourceId) && (sourceType === 'lane') ) {
+      targetProps.onMoveLane(sourceId, targetId);
     }
   }
+};
+
+var collectDragSource = function(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
 };
 
 var collectDropTarget = function(connect) {
@@ -64,7 +86,7 @@ var mapDispatchToProps = function(dispatch) {
     },
 
     onMoveNote: function(sourceId, targetId) {
-      dispatch( lanesActions.move(sourceId, targetId) );
+      dispatch( lanesActions.move('note', sourceId, targetId) );
     },
 
     attachToLane: function(laneId, noteId) {
@@ -74,5 +96,7 @@ var mapDispatchToProps = function(dispatch) {
 };
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(
-  DropTarget(ItemTypes.NOTE, laneTarget, collectDropTarget)(Lane)
+  DragSource(ItemTypes.LANE, laneSource, collectDragSource)(
+    DropTarget([ItemTypes.NOTE, ItemTypes.LANE], laneTarget, collectDropTarget)(Lane)
+  )
 );
