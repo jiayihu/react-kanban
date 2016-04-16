@@ -3,7 +3,8 @@ var packageManifest = require('../../package.json');
 
 var gulp = require('gulp');
 var browserify = require('browserify');
-var envify = require('envify');
+var envify = require('loose-envify');
+var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
@@ -15,7 +16,7 @@ var paths = {
   dest: path.join(config.root.dest, config.tasks.scripts.dest)
 };
 
-
+var isProduction = process.env.NODE_ENV === 'production';
 var getDependencies = function() {
   return Object.keys(packageManifest.dependencies);
 };
@@ -31,10 +32,10 @@ var buildVendor = function() {
 
   return vendorBundle.bundle()
     .on('error', console.log)
-    .pipe(envify())
+    .pipe(gulpif(isProduction, envify()))
     .pipe(source('vendor.js'))
     .pipe(buffer())
-    .pipe(uglify())
+    .pipe(gulpif(isProduction, uglify()))
     .pipe(gulp.dest(paths.dest));
 };
 

@@ -4,7 +4,7 @@ var runSequence = require('run-sequence');
 var productionTask = function() {
   runSequence(
     'clean',
-    ['fonts', 'images', 'static'],
+    ['fonts', 'images', 'svgSprite', 'static'],
     ['html', 'css', 'vendorScripts', 'scripts']
   );
 };

@@ -64,7 +64,7 @@
     background-color: $white;
     border: 1px solid lighten($gray-light, 10%);
     box-shadow: none;
-    color: $gray-light;
+    color: $gray-dark;
     height: 1em;
     line-height: 1em;
     padding: 0;
@@ -78,7 +78,6 @@
     background-color: $white;
     background-image: url('../images/drag-cursor.png');
     background-position: center;
-    background-size: 3.725em;
     border: 1px solid lighten($gray-light, 10%);
     box-shadow: none;
     cursor: move;

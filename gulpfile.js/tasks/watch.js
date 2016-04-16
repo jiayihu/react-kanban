@@ -3,7 +3,7 @@ var gulp = require('gulp');
 var path = require('path');
 
 var watchTask = function() {
-  var watchableTasks = ['css', 'html','images','fonts'];
+  var watchableTasks = ['css', 'html', 'images', 'fonts', 'svgSprite'];
 
   watchableTasks.forEach(function(taskName) {
     var task = config.tasks[taskName];

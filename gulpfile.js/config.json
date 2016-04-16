@@ -1,17 +1,16 @@
 {
   "root": {
     "src": "./app",
-    "dest": "./webapp/public"
+    "dest": "./public"
   },
 
   "tasks": {
     "browserSync": {
       "browser": "Google Chrome",
       "server": {
-        "baseDir": "./webapp/public"
+        "baseDir": "./public"
       },
-      "notify": false,
-      "online": false
+      "notify": false
     },
 
     "css": {
@@ -26,7 +25,11 @@
       "cssnano": {
 
       },
-      "extensions": ["scss", "css", "sass"]
+      "extensions": ["scss", "css"]
+    },
+
+    "deploy": {
+      "branch": "master"
     },
 
     "fonts": {
@@ -60,6 +63,12 @@
     "static": {
       "src": "static",
       "dest": "./"
+    },
+
+    "svgSprite": {
+      "src": "icons",
+      "dest": "images",
+      "extensions": ["svg"]
     }
   }
 }
