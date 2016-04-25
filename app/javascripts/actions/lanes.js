@@ -1,125 +1,145 @@
-var helpers = require('../helpers');
-var uuid = require('uuid');
+import uuid from 'uuid';
+import * as types from './constants';
 
 /**
  * Checks if string is valid v4 id
  * @param  {string} id Id to be checked
  * @return {boolean}
  */
-var isV4 = function(id) {
+function isV4(id) {
   if(typeof id !== 'string') {
     return false;
   }
 
   return /^[a-z0-9]{8}-[a-z0-9]{4}-4[a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(id);
-};
+}
 
-var CREATE_LANE = 'CREATE_LANE';
-var createLane = function(name) {
+/**
+ * Returns a createLane action
+ * @param  {String} name Lane name
+ * @return {Object}
+ */
+function createLane(name) {
   if(typeof name !== 'string') {
-    helpers.makeError('params', name);
+    throw new Error(`params ${name}`);
   }
 
   return {
-    type: CREATE_LANE,
+    type: types.CREATE_LANE,
     payload: {
       id: uuid.v4(),
-      name: name,
-      notes: []
-    }
+      name,
+      notes: [],
+    },
   };
-};
+}
 
-var UPDATE_LANE = 'UPDATE_LANE';
-var updateLane = function(updatedLane) {
-  if( (typeof updatedLane !== 'object') || (!isV4(updatedLane.id)) ) {
-    helpers.makeError('params', updatedLane);
+/**
+ * Returns the action to update a lane
+ * @param  {Object} updatedLane Updated lane properties
+ * @return {Object}
+ * @example
+ * updateLane({
+ *   id: String,
+ *   name: String,
+ *   editing: Bool
+ * })
+ */
+function updateLane(updatedLane) {
+  if((typeof updatedLane !== 'object') || (!isV4(updatedLane.id))) {
+    throw new Error(`params ${updatedLane}`);
   }
 
   return {
-    type: UPDATE_LANE,
-    payload: updatedLane
+    type: types.UPDATE_LANE,
+    payload: updatedLane,
   };
-};
+}
 
-var DELETE_LANE = 'DELETE_LANE';
-var deleteLane = function(id) {
+/**
+ * Returns an action to delete a lane
+ * @param  {String} id Lane id
+ * @return {Object}
+ */
+function deleteLane(id) {
   if(!isV4(id)) {
-    helpers.makeError('params', id);
+    throw new Error(`params ${id}`);
   }
 
   return {
-    type: DELETE_LANE,
+    type: types.DELETE_LANE,
     payload: {
-      id: id
-    }
+      id,
+    },
   };
-};
+}
 
-var ATTACH_TO_LANE = 'ATTACH_TO_LANE';
-var attachToLane = function(laneId, noteId) {
-  if( (!isV4(laneId)) || (!isV4(noteId)) ) {
-    helpers.makeError('params', {laneId: laneId, noteId: noteId});
+/**
+ * Returns an action to attach a note to a lane
+ * @param  {String} laneId Lane id
+ * @param  {String} noteId Note id
+ * @return {Object}
+ */
+function attachToLane(laneId, noteId) {
+  if((!isV4(laneId)) || (!isV4(noteId))) {
+    throw new Error(`params ${laneId} ${noteId}`);
   }
 
   return {
-    type: ATTACH_TO_LANE,
+    type: types.ATTACH_TO_LANE,
     payload: {
-      laneId: laneId,
-      noteId: noteId
-    }
+      laneId,
+      noteId,
+    },
   };
-};
+}
 
-var DETACH_FROM_LANE = 'DETACH_FROM_LANE';
-var detachFromLane = function(laneId, noteId) {
-  if( (!isV4(laneId)) || (!isV4(noteId)) ) {
-    helpers.makeError('params', {laneId: laneId, noteId: noteId});
+/**
+ * Returns an action to detach a note from a lane
+ * @param  {String} laneId Lane id
+ * @param  {String} noteId Note id
+ * @return {Object}
+ */
+function detachFromLane(laneId, noteId) {
+  if((!isV4(laneId)) || (!isV4(noteId))) {
+    throw new Error(`params ${laneId} ${noteId}`);
   }
 
   return {
-    type: DETACH_FROM_LANE,
+    type: types.DETACH_FROM_LANE,
     payload: {
-      laneId: laneId,
-      noteId: noteId
-    }
+      laneId,
+      noteId,
+    },
   };
-};
+}
 
-var MOVE_NOTE = 'MOVE_NOTE';
-var MOVE_LANE = 'MOVE_LANE';
-var move = function(target, sourceId, targetId) {
-  if( (typeof target !== 'string') || (!isV4(sourceId)) || (!isV4(targetId)) ) {
-    helpers.makeError('params', {
-      target: target,
-      sourceId: sourceId,
-      targetId: targetId
-    });
+/**
+ * Returns an action to move a note or a lane
+ * @param  {String} target Whether it's a note or a lane
+ * @param  {String} sourceId Source id
+ * @param  {String} targetId Target id
+ * @return {Object}
+ */
+function move(target, sourceId, targetId) {
+  if((typeof target !== 'string') || (!isV4(sourceId)) || (!isV4(targetId))) {
+    throw new Error(`params ${target} ${sourceId} ${targetId}`);
   }
 
   return {
-    type: target === 'note'? MOVE_NOTE : MOVE_LANE,
+    type: target === 'note' ? types.MOVE_NOTE : types.MOVE_LANE,
     payload: {
-      sourceId: sourceId,
-      targetId: targetId
-    }
+      sourceId,
+      targetId,
+    },
   };
-};
+}
 
-module.exports = {
-  types: {
-    CREATE_LANE: CREATE_LANE,
-    UPDATE_LANE: UPDATE_LANE,
-    DELETE_LANE: DELETE_LANE,
-    ATTACH_TO_LANE: ATTACH_TO_LANE,
-    DETACH_FROM_LANE: DETACH_FROM_LANE,
-    MOVE_NOTE: MOVE_NOTE,
-    MOVE_LANE: MOVE_LANE
-  },
-  createLane: createLane,
-  updateLane: updateLane,
-  deleteLane: deleteLane,
-  attachToLane: attachToLane,
-  detachFromLane: detachFromLane,
-  move: move
+export default {
+  createLane,
+  updateLane,
+  deleteLane,
+  attachToLane,
+  detachFromLane,
+  move,
 };

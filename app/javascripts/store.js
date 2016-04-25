@@ -1,30 +1,23 @@
-var createStore = require('redux').createStore;
-var applyMiddleware = require('redux').applyMiddleware;
-var rootReducer = require('./reducers');
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
 
-var logger = function(Store) {
-  return function(next) {
-    return function(action) {
-      var console = window.console;
-      var prevState = Store.getState();
-      var returnValue = next(action);
-      var nextState = Store.getState();
-      console.log('%c prev state', 'color: #9E9E9E', prevState);
-      console.log('%c action', 'color: #03A9F4', action);
-      console.log('%c next state', 'color: #4CAF50', nextState);
-      return returnValue;
-    };
-  };
+const logger = (Store) => (next) => (action) => {
+  const console = window.console;
+  const prevState = Store.getState();
+  const returnValue = next(action);
+  const nextState = Store.getState();
+
+  console.log('%c prev state', 'color: #9E9E9E', prevState);
+  console.log('%c action', 'color: #03A9F4', action);
+  console.log('%c next state', 'color: #4CAF50', nextState);
+
+  return returnValue;
 };
 
-var reduxDebug = window.devToolsExtension ? window.devToolsExtension : function(f) {return f;};
+const reduxDebug = window.devToolsExtension ? window.devToolsExtension : (f) => f;
 
-module.exports = function(initialState) {
-  initialState = initialState || {};
-
-  return createStore(
-    rootReducer,
-    initialState,
-    reduxDebug(applyMiddleware(logger))
-  );
-};
+export default (initialState = {}) => createStore(
+  rootReducer,
+  initialState,
+  reduxDebug(applyMiddleware(logger))
+);

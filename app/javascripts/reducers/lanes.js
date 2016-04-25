@@ -1,4 +1,4 @@
-var types = require('../actions/lanes').types;
+var types = require('../actions/constants');
 var uuid = require('uuid');
 var update = require('react-addons-update');
 

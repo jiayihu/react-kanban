@@ -1,27 +1,25 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Provider = require('react-redux').Provider;
-var App = require('./containers/App.jsx');
-var localforage = require('localforage');
-var configStore = require('./store');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './containers/App.jsx';
+import localforage from 'localforage';
+import configStore from './store';
 
-var localStore = localforage.createInstance({
-  name: 'kanban'
+const localStore = localforage.createInstance({
+  name: 'kanban',
 });
 
-var onReset = function() {
+function onReset() {
   localStore.clear();
   window.location.reload();
-};
+}
 
 localStore.getItem('state')
-  .then(function(value) {
-    return configStore(value);
-  }, function(err) {
+  .then(value => configStore(value), (err) => {
     console.error(err);
     return configStore(null);
   })
-  .then(function(store) {
+  .then((store) => {
     ReactDOM.render(
       <div>
         <Provider store={store}>
@@ -31,7 +29,7 @@ localStore.getItem('state')
       document.querySelector('.app')
     );
 
-    store.subscribe(function() {
-      localStore.setItem('state', store.getState());
-    });
+    store.subscribe(() => localStore.setItem('state', store.getState()));
   });
+
+window.addEventListener('error', (err) => console.error(err));

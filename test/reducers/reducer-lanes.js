@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var reducer = require('../app/javascripts/reducers/lanes');
-var types = require('../app/javascripts/actions/lanes').types;
+var reducer = require('../../app/javascripts/reducers/lanes');
+var types = require('../../app/javascripts/actions/constants');
 
 describe('lanes reducer', function() {
   it('should return the initial state', function() {

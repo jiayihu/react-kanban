@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var actions = require('../app/javascripts/actions/notes');
+var actions = require('../../app/javascripts/actions/notes');
 var uuid = require('uuid');
 
 describe('notes actions', function() {

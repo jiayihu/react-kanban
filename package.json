@@ -1,6 +1,6 @@
 {
   "name": "react-kanban",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Kanban board build with React.js",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
     "clean": "rm -rf ./public && mkdir ./public ",
     "dev": "gulp",
     "production": "npm run clean && NODE_ENV=production gulp production",
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --recursive --compilers js:babel-register"
   },
   "author": "jiayi hu",
   "license": "MIT",

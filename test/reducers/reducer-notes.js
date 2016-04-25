@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var reducer = require('../app/javascripts/reducers/notes');
-var types = require('../app/javascripts/actions/notes').types;
+var reducer = require('../../app/javascripts/reducers/notes');
+var types = require('../../app/javascripts/actions/notes').types;
 var uuid = require('uuid');
 
 describe('notes reducer', function() {
