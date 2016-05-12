@@ -1,89 +1,76 @@
-var helpers = require('../helpers');
-var uuid = require('uuid');
+import * as types from './constants';
+import uuid from 'uuid';
 
 /**
- * Actions Types
+ * Checks if String is valid v4 id
+ * @param  {String} id Id to be checked
+ * @return {Boolean}
  */
-
-var CREATE_NOTE = 'CREATE_NOTE';
-var UPDATE_NOTE = 'UPDATE_NOTE';
-var DELETE_NOTE = 'DELETE_NOTE';
-
-/**
- * Checks if string is valid v4 id
- * @param  {string} id Id to be checked
- * @return {boolean}
- */
-var isV4 = function(id) {
+function isV4(id) {
   if(typeof id !== 'string') {
     return false;
   }
 
   return /^[a-z0-9]{8}-[a-z0-9]{4}-4[a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(id);
-};
+}
 
 /**
  * Returns the action to create a note
- * @param  {string} text Note text
- * @return {object}
+ * @param  {String} text Note text
+ * @return {Object}
  */
-var createNote = function(text) {
+function createNote(text) {
   if(typeof text !== 'string') {
-    helpers.makeError('params', text);
+    throw new Error(`params ${text}`);
   }
 
   return {
-    type: CREATE_NOTE,
+    type: types.CREATE_NOTE,
     payload: {
       id: uuid.v4(),
       editing: false,
-      text: text
-    }
+      text,
+    },
   };
-};
+}
 
 /**
  * Returns the action to update a note
- * @param  {object} updatedNote Object with note properties to update. It must
+ * @param  {Object} updatedNote Object with note properties to update. It must
  * have a valid id.
- * @return {object}
+ * @return {Object}
  */
-var updateNote = function(updatedNote) {
-  if( (typeof updatedNote !== 'object') || (!isV4(updatedNote.id)) ) {
-    helpers.makeError('params', updatedNote);
+function updateNote(updatedNote) {
+  if((typeof updatedNote !== 'object') || (!isV4(updatedNote.id))) {
+    throw new Error(`params ${updatedNote}`);
   }
 
   return {
-    type: UPDATE_NOTE,
-    payload: updatedNote
+    type: types.UPDATE_NOTE,
+    payload: updatedNote,
   };
-};
+}
 
 /**
  * Returns the action to delete a note
- * @param  {string} id Note id
- * @return {object}
+ * @param  {String} id Note id
+ * @return {Object}
  */
-var deleteNote = function(id) {
+function deleteNote(id) {
   if(!isV4(id)) {
-    helpers.makeError('params', id);
+    throw new Error(`params ${id}`);
   }
 
   return {
-    type: DELETE_NOTE,
+    type: types.DELETE_NOTE,
     payload: {
-      id: id
-    }
+      id,
+    },
   };
-};
+}
 
-module.exports = {
-  types: {
-    CREATE_NOTE: CREATE_NOTE,
-    UPDATE_NOTE: UPDATE_NOTE,
-    DELETE_NOTE: DELETE_NOTE
-  },
-  createNote: createNote,
-  updateNote: updateNote,
-  deleteNote: deleteNote
+export default {
+  createNote,
+  updateNote,
+  deleteNote,
 };

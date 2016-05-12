@@ -3,8 +3,8 @@ import * as types from './constants';
 
 /**
  * Checks if string is valid v4 id
- * @param  {string} id Id to be checked
- * @return {boolean}
+ * @param  {String} id Id to be checked
+ * @return {Boolean}
  */
 function isV4(id) {
   if(typeof id !== 'string') {
