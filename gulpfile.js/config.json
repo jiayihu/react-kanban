@@ -28,10 +28,6 @@
       "extensions": ["scss", "css"]
     },
 
-    "deploy": {
-      "branch": "master"
-    },
-
     "fonts": {
       "src": "fonts",
       "dest": "fonts",
