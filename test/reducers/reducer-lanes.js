@@ -1,32 +1,32 @@
-var expect = require('chai').expect;
-var reducer = require('../../app/javascripts/reducers/lanes');
-var types = require('../../app/javascripts/actions/constants');
+import { expect } from 'chai';
+import reducer from '../../app/javascripts/reducers/lanes';
+import * as actionTypes from '../../app/javascripts/constants/actionTypes';
 
-describe('lanes reducer', function() {
-  it('should return the initial state', function() {
-    expect(reducer(null, {type: 'unknown'})).to.have.length(3);
+describe('lanes reducer', () => {
+  it('should return the initial state', () => {
+    expect(reducer(undefined, { type: 'unknown' })).to.have.length(3);
   });
 
-  it('should handle CREATE_LANE', function() {
-    var createAction = {
-      type: types.CREATE_LANE,
+  it('should handle CREATE_LANE', () => {
+    const createAction = {
+      type: actionTypes.CREATE_LANE,
       payload: {
-        name: 'New Lane'
-      }
+        name: 'New Lane',
+      },
     };
 
     expect(reducer([], createAction)).to.deep.equal([createAction.payload]);
   });
 
-  it('should handle ATTACH_TO_LANE', function() {
-    var action = {
-      type: types.ATTACH_TO_LANE,
+  it('should handle ATTACH_TO_LANE', () => {
+    const action = {
+      type: actionTypes.ATTACH_TO_LANE,
       payload: {
         laneId: 1,
-        noteId: 1
-      }
+        noteId: 1,
+      },
     };
 
-    expect(reducer(null, action)).to.have.length(3);
+    expect(reducer(undefined, action)).to.have.length(3);
   });
 });

@@ -1,54 +1,54 @@
-var expect = require('chai').expect;
-var reducer = require('../../app/javascripts/reducers/notes');
-var types = require('../../app/javascripts/actions/notes').types;
-var uuid = require('uuid');
+import { expect } from 'chai';
+import reducer from '../../app/javascripts/reducers/notes';
+import * as actionTypes from '../../app/javascripts/constants/actionTypes';
+import uuid from 'uuid';
 
-describe('notes reducer', function() {
-  it('should return the initial state', function() {
-    expect(reducer([], {type: 'unknown type'})).to.deep.equal([]);
+describe('notes reducer', () => {
+  it('should return the initial state', () => {
+    expect(reducer([], { type: 'unknown type' })).to.deep.equal([]);
   });
 
-  it('should handle CREATE_NOTE', function() {
-    var createAction = {
-      type: types.CREATE_NOTE,
+  it('should handle CREATE_NOTE', () => {
+    const createAction = {
+      type: actionTypes.CREATE_NOTE,
       payload: {
         id: uuid.v4(),
-        text: 'New task'
-      }
+        text: 'New task',
+      },
     };
 
     expect(reducer([], createAction)).to.deep.equal([createAction.payload]);
-    expect(reducer(null, createAction)).to.have.length(1);
+    expect(reducer(undefined, createAction)).to.have.length(1);
   });
 
-  it('should handle UPDATE_NOTE', function() {
-    var v4Id = uuid.v4();
-    var oldState = [{
+  it('should handle UPDATE_NOTE', () => {
+    const v4Id = uuid.v4();
+    const oldState = [{
       id: v4Id,
-      text: 'Old task'
+      text: 'Old task',
     }];
-    var updateAction = {
-      type: types.UPDATE_NOTE,
+    const updateAction = {
+      type: actionTypes.UPDATE_NOTE,
       payload: {
         id: v4Id,
-        text: 'New task'
-      }
+        text: 'New task',
+      },
     };
 
     expect(reducer(oldState, updateAction)).to.deep.equal([updateAction.payload]);
   });
 
-  it('should handle DELETE_NOTE', function() {
-    var v4Id = uuid.v4();
-    var oldState = [{
+  it('should handle DELETE_NOTE', () => {
+    const v4Id = uuid.v4();
+    const oldState = [{
       id: v4Id,
-      text: 'Old task'
+      text: 'Old task',
     }];
-    var deleteAction = {
-      type: types.DELETE_NOTE,
+    const deleteAction = {
+      type: actionTypes.DELETE_NOTE,
       payload: {
-        id: v4Id
-      }
+        id: v4Id,
+      },
     };
 
     expect(reducer(oldState, deleteAction)).to.deep.equal([]);

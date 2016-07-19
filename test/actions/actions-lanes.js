@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import actions from '../../app/javascripts/actions/lanes';
-import * as types from '../../app/javascripts/actions/constants';
+import * as actionTypes from '../../app/javascripts/constants/actionTypes';
 import uuid from 'uuid';
 
 describe('lanes actions', function description() {
-  it('should return an action to create a lane', function test() {
+  it('should return an action to create a lane', () => {
     const name = 'Active';
     const expectedAction = {
-      type: types.CREATE_LANE,
+      type: actionTypes.CREATE_LANE,
       payload: {
         id: uuid(),
         name,
@@ -20,10 +20,10 @@ describe('lanes actions', function description() {
     expect(actions.createLane(name).payload.notes).to.be.an('array');
   });
 
-  it('should return an action to attach a note to a lane', function test() {
+  it('should return an action to attach a note to a lane', () => {
     const validId = uuid.v4();
     const expectedAction = {
-      type: types.ATTACH_TO_LANE,
+      type: actionTypes.ATTACH_TO_LANE,
       payload: {
         laneId: validId,
         noteId: validId,
@@ -33,14 +33,14 @@ describe('lanes actions', function description() {
     expect(actions.attachToLane(validId, validId)).to.deep.equal(expectedAction);
   });
 
-  it('should return an action to update a lane', function test() {
+  it('should return an action to update a lane', () => {
     const validId = uuid.v4();
     const updatedLane = {
       id: validId,
       name: 'Text',
     };
     const expectedAction = {
-      type: types.UPDATE_LANE,
+      type: actionTypes.UPDATE_LANE,
       payload: {
         id: validId,
         name: 'Text',
@@ -50,10 +50,10 @@ describe('lanes actions', function description() {
     expect(actions.updateLane(updatedLane)).to.deep.equal(expectedAction);
   });
 
-  it('should create an action to delete the lane', function test() {
+  it('should create an action to delete the lane', () => {
     const validId = uuid.v4();
     const expectedAction = {
-      type: types.DELETE_LANE,
+      type: actionTypes.DELETE_LANE,
       payload: {
         id: validId,
       },
@@ -62,10 +62,10 @@ describe('lanes actions', function description() {
     expect(actions.deleteLane(validId)).to.deep.equal(expectedAction);
   });
 
-  it('should return an action to detach a note from a lane', function test() {
+  it('should return an action to detach a note from a lane', () => {
     const validId = uuid.v4();
     const expectedAction = {
-      type: types.DETACH_FROM_LANE,
+      type: actionTypes.DETACH_FROM_LANE,
       payload: {
         laneId: validId,
         noteId: validId,
@@ -75,10 +75,10 @@ describe('lanes actions', function description() {
     expect(actions.detachFromLane(validId, validId)).to.deep.equal(expectedAction);
   });
 
-  it('should return an action to move a note in the lane', function test() {
+  it('should return an action to move a note in the lane', () => {
     const validId = uuid.v4();
     const expectedAction = {
-      type: types.MOVE_NOTE,
+      type: actionTypes.MOVE_NOTE,
       payload: {
         sourceId: validId,
         targetId: validId,
@@ -88,7 +88,7 @@ describe('lanes actions', function description() {
     expect(actions.move('note', validId, validId)).to.deep.equal(expectedAction);
   });
 
-  it('should throw an error', function test() {
+  it('should throw an error', () => {
     expect(actions.createLane.bind(null, {})).to.throw(Error);
     expect(actions.attachToLane.bind(null, 1, 'invalidId')).to.throw(Error);
     expect(actions.detachFromLane.bind(null, 1, 'invalidId')).to.throw(Error);
