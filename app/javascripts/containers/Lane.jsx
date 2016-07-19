@@ -4,7 +4,7 @@ import notesActions from '../actions/notes';
 import { connect } from 'react-redux';
 import { DragSource } from 'react-dnd';
 import { DropTarget } from 'react-dnd';
-import * as ItemTypes from '../constants/itemTypes';
+import * as itemTypes from '../constants/itemTypes';
 
 const laneSource = {
   beginDrag(props) {
@@ -25,9 +25,9 @@ const laneTarget = {
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
     const sourceType = monitor.getItemType();
-    if((!targetProps.lane.notes.length) && sourceType === 'note') {
+    if((!targetProps.lane.notes.length) && sourceType === itemTypes.NOTE) {
       targetProps.attachToLane(targetId, sourceId);
-    } else if((targetId !== sourceId) && (sourceType === 'lane')) {
+    } else if((targetId !== sourceId) && (sourceType === itemTypes.LANE)) {
       targetProps.onMoveLane(sourceId, targetId);
     }
   },
@@ -89,7 +89,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  DragSource(ItemTypes.LANE, laneSource, collectDragSource)(
-    DropTarget([ItemTypes.NOTE, ItemTypes.LANE], laneTarget, collectDropTarget)(Lane)
+  DragSource(itemTypes.LANE, laneSource, collectDragSource)(
+    DropTarget([itemTypes.NOTE, itemTypes.LANE], laneTarget, collectDropTarget)(Lane)
   )
 );

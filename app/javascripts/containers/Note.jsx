@@ -1,7 +1,7 @@
 import Note from '../components/Note.jsx';
 import { DragSource } from 'react-dnd';
 import { DropTarget } from 'react-dnd';
-import * as ItemTypes from '../constants/itemTypes';
+import * as itemTypes from '../constants/itemTypes';
 
 const noteSource = {
   beginDrag(props) {
@@ -37,6 +37,6 @@ const collectDropTarget = (connect) => ({
   connectDropTarget: connect.dropTarget(),
 });
 
-export default DragSource(ItemTypes.NOTE, noteSource, collectDragSource)(
-  DropTarget(ItemTypes.NOTE, noteTarget, collectDropTarget)(Note)
+export default DragSource(itemTypes.NOTE, noteSource, collectDragSource)(
+  DropTarget(itemTypes.NOTE, noteTarget, collectDropTarget)(Note)
 );
