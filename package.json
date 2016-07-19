@@ -11,8 +11,7 @@
     "clean": "rm -rf ./public && mkdir ./public ",
     "deploy": "npm run build && gulp deploy",
     "start": "gulp",
-    "test": "mocha --recursive --compilers js:babel-register",
-    "vendor": "gulp vendorScripts"
+    "test": "mocha --recursive --compilers js:babel-register"
   },
   "author": "jiayi hu",
   "license": "MIT",
