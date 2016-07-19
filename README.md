@@ -8,4 +8,5 @@
 
 ## TODO
  - [x] Draggable Lanes
- - [ ] React.js animations
+ - [x] Refactor in ES6
+ - [ ] Add authentication
