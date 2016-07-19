@@ -8,11 +8,11 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:vendor && NODE_ENV=production gulp production",
-    "build:vendor": "NODE_ENV=production gulp vendorScripts",
     "clean": "rm -rf ./public && mkdir ./public ",
     "deploy": "npm run build && gulp deploy",
     "start": "gulp",
-    "test": "mocha --recursive --compilers js:babel-register"
+    "test": "mocha --recursive --compilers js:babel-register",
+    "vendor": "gulp vendorScripts"
   },
   "author": "jiayi hu",
   "license": "MIT",
