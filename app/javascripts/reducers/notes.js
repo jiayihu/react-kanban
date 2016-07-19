@@ -1,30 +1,22 @@
-var types = require('../actions/notes').types;
+import * as actionTypes from '../constants/actionTypes';
 
-var initialState = [];
-
-var reducer = function(state, action) {
-  state = state || initialState;
-
+export default function notes(state = [], action) {
   switch (action.type) {
-    case types.CREATE_NOTE:
+    case actionTypes.CREATE_NOTE:
       return state.concat(action.payload);
 
-    case types.UPDATE_NOTE:
-      return state.map(function(note) {
+    case actionTypes.UPDATE_NOTE:
+      return state.map(note => {
         if(note.id === action.payload.id) {
           return Object.assign({}, note, action.payload);
         }
         return note;
       });
 
-    case types.DELETE_NOTE:
-      return state.filter(function(note) {
-        return note.id !== action.payload.id;
-      });
+    case actionTypes.DELETE_NOTE:
+      return state.filter(note => note.id !== action.payload.id);
 
     default:
       return state;
   }
-};
-
-module.exports = reducer;
+}

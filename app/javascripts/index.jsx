@@ -31,5 +31,3 @@ localStore.getItem('state')
 
     store.subscribe(() => localStore.setItem('state', store.getState()));
   });
-
-window.addEventListener('error', (err) => console.error(err));

@@ -1,5 +1,5 @@
-import * as types from './constants';
 import uuid from 'uuid';
+import * as actionTypes from '../constants/actionTypes';
 
 /**
  * Checks if String is valid v4 id
@@ -25,7 +25,7 @@ function createNote(text) {
   }
 
   return {
-    type: types.CREATE_NOTE,
+    type: actionTypes.CREATE_NOTE,
     payload: {
       id: uuid.v4(),
       editing: false,
@@ -46,7 +46,7 @@ function updateNote(updatedNote) {
   }
 
   return {
-    type: types.UPDATE_NOTE,
+    type: actionTypes.UPDATE_NOTE,
     payload: updatedNote,
   };
 }
@@ -62,7 +62,7 @@ function deleteNote(id) {
   }
 
   return {
-    type: types.DELETE_NOTE,
+    type: actionTypes.DELETE_NOTE,
     payload: {
       id,
     },

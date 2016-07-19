@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import * as types from './constants';
+import * as actionTypes from '../constants/actionTypes';
 
 /**
  * Checks if string is valid v4 id
@@ -25,7 +25,7 @@ function createLane(name) {
   }
 
   return {
-    type: types.CREATE_LANE,
+    type: actionTypes.CREATE_LANE,
     payload: {
       id: uuid.v4(),
       name,
@@ -51,7 +51,7 @@ function updateLane(updatedLane) {
   }
 
   return {
-    type: types.UPDATE_LANE,
+    type: actionTypes.UPDATE_LANE,
     payload: updatedLane,
   };
 }
@@ -67,7 +67,7 @@ function deleteLane(id) {
   }
 
   return {
-    type: types.DELETE_LANE,
+    type: actionTypes.DELETE_LANE,
     payload: {
       id,
     },
@@ -86,7 +86,7 @@ function attachToLane(laneId, noteId) {
   }
 
   return {
-    type: types.ATTACH_TO_LANE,
+    type: actionTypes.ATTACH_TO_LANE,
     payload: {
       laneId,
       noteId,
@@ -106,7 +106,7 @@ function detachFromLane(laneId, noteId) {
   }
 
   return {
-    type: types.DETACH_FROM_LANE,
+    type: actionTypes.DETACH_FROM_LANE,
     payload: {
       laneId,
       noteId,
@@ -127,7 +127,7 @@ function move(target, sourceId, targetId) {
   }
 
   return {
-    type: target === 'note' ? types.MOVE_NOTE : types.MOVE_LANE,
+    type: target === 'note' ? actionTypes.MOVE_NOTE : actionTypes.MOVE_LANE,
     payload: {
       sourceId,
       targetId,

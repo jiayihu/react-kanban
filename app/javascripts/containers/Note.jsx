@@ -1,46 +1,42 @@
-var Note = require('../components/Note.jsx');
-var DragSource = require('react-dnd').DragSource;
-var DropTarget = require('react-dnd').DropTarget;
-var ItemTypes = require('../constants/itemTypes');
+import Note from '../components/Note.jsx';
+import { DragSource } from 'react-dnd';
+import { DropTarget } from 'react-dnd';
+import * as ItemTypes from '../constants/itemTypes';
 
-var noteSource = {
-  beginDrag: function(props) {
-    var item = {
-      id: props.id
+const noteSource = {
+  beginDrag(props) {
+    const item = {
+      id: props.id,
     };
 
     return item;
   },
-  isDragging: function(props, monitor) {
+  isDragging(props, monitor) {
     return props.id === monitor.getItem().id;
-  }
+  },
 };
 
-var noteTarget = {
-  hover: function(targetProps, monitor) {
-    var targetId = targetProps.id;
-    var sourceProps = monitor.getItem();
-    var sourceId = sourceProps.id;
+const noteTarget = {
+  hover(targetProps, monitor) {
+    const targetId = targetProps.id;
+    const sourceProps = monitor.getItem();
+    const sourceId = sourceProps.id;
 
     if(sourceId !== targetId) {
       targetProps.onMoveNote(sourceId, targetId);
     }
-  }
+  },
 };
 
-var collectDragSource = function(connect, monitor) {
-  return {
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  };
-};
+const collectDragSource = (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging(),
+});
 
-var collectDropTarget = function(connect) {
-  return {
-    connectDropTarget: connect.dropTarget()
-  };
-};
+const collectDropTarget = (connect) => ({
+  connectDropTarget: connect.dropTarget(),
+});
 
-module.exports = DragSource(ItemTypes.NOTE, noteSource, collectDragSource)(
+export default DragSource(ItemTypes.NOTE, noteSource, collectDragSource)(
   DropTarget(ItemTypes.NOTE, noteTarget, collectDropTarget)(Note)
 );

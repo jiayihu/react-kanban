@@ -1,53 +1,63 @@
-var React = require('react');
+import React, { PropTypes } from 'react';
 
-var Editable = React.createClass({
-  handleDelete: function() {
-    this.props.onDelete();
-  },
+export default class Editable extends React.Component {
+  constructor() {
+    super();
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleValueClick = this.handleValueClick.bind(this);
+    this.handleFinishEdit = this.handleFinishEdit.bind(this);
+    this.selectToEnd = this.selectToEnd.bind(this);
+  }
 
-  handleValueClick: function() {
-    this.props.onValueClick();
-  },
+  handleDelete() {
+    this.props.onDelete(this.props.id);
+  }
 
-  handleFinishEdit: function(e) {
-    if( (e.type === 'keypress') && (e.key !== 'Enter') ) {
+  handleValueClick() {
+    this.props.onValueClick(this.props.id);
+  }
+
+  handleFinishEdit(e) {
+    if((e.type === 'keypress') && (e.key !== 'Enter')) {
       return;
     }
 
-    var value = e.target.value;
+    const value = e.target.value;
 
     if(this.props.onEdit && value.trim().length) {
-      this.props.onEdit(value);
+      this.props.onEdit(this.props.id, value);
     }
-  },
+  }
 
-  renderEdit: function() {
+  selectToEnd(input) {
+    if(input) {
+      input.selectionEnd = this.props.value.length;
+    }
+  }
+
+  renderEdit() {
     return (
         <input
           type="text"
           autoFocus
           className="editing"
-          ref={function(input) {
-            if(input) {
-              input.selectionEnd = this.props.value.length;
-            }
-          }.bind(this)}
+          ref={this.selectToEnd}
           defaultValue={this.props.value}
           onBlur={this.handleFinishEdit}
           onKeyPress={this.handleFinishEdit}
         />
     );
-  },
+  }
 
-  renderDelete: function() {
+  renderDelete() {
     return (
       <span className="delete" onClick={this.handleDelete}>
         &times;
       </span>
     );
-  },
+  }
 
-  renderValue: function() {
+  renderValue() {
     return (
         <span>
           <input
@@ -56,18 +66,25 @@ var Editable = React.createClass({
             defaultValue={this.props.value}
             readOnly
           />
-        {this.props.onDelete? this.renderDelete() : null}
+          {this.props.onDelete ? this.renderDelete() : null}
         </span>
     );
-  },
+  }
 
-  render: function() {
+  render() {
     if(this.props.editing) {
       return this.renderEdit();
     }
 
     return this.renderValue();
   }
-});
+}
 
-module.exports = Editable;
+Editable.propTypes = {
+  editing: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func.isRequired,
+  onValueClick: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};

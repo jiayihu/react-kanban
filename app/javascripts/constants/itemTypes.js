@@ -1,4 +1,2 @@
-module.exports = {
-  LANE: 'lane',
-  NOTE: 'note',
-};
+export const LANE = 'LANE';
+export const NOTE = 'NOTE';

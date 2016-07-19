@@ -1,29 +1,27 @@
-'use strict';
+import React, { PropTypes } from 'react';
 
-var React = require('react');
+import lanesActions from '../actions/lanes';
+import { connect } from 'react-redux';
+import Lanes from '../components/Lanes.jsx';
 
-var lanesActions = require('../actions/lanes');
-var connect = require('react-redux').connect;
-var Lanes = require('../components/Lanes.jsx');
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 
-var HTML5Backend = require('react-dnd-html5-backend');
-var DragDropContext = require('react-dnd').DragDropContext;
-
-var App = React.createClass({
-
-  render: function() {
+class App extends React.Component {
+  render() {
     return (
       <div className="react-kanban">
         <h1 className="app-title">React.js Kanban</h1>
         <button
           className="add-lane"
-          onClick={this.props.onCreateLane}>
+          onClick={this.props.onCreateLane}
+        >
           + Lane
         </button>
         <button
           className="reset-store"
           onClick={this.props.onReset}
-          >
+        >
           Reset persisted store
         </button>
         <Lanes
@@ -35,45 +33,50 @@ var App = React.createClass({
       </div>
     );
   }
+}
+
+App.propTypes = {
+  lanes: PropTypes.array.isRequired,
+  onCreateLane: PropTypes.func.isRequired,
+  onDeleteLane: PropTypes.func.isRequired,
+  onEditLane: PropTypes.func.isRequired,
+  onMoveLane: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  lanes: state.lanes,
 });
 
-var mapStateToProps = function(state) {
-  return {
-    lanes: state.lanes
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  onCreateLane() {
+    dispatch(lanesActions.createLane('Active'));
+  },
 
-var mapDispatchToProps = function(dispatch) {
-  return {
-    onCreateLane: function() {
-      dispatch( lanesActions.createLane('Active') );
-    },
+  onEditLane(laneId, name) {
+    const updatedLane = {
+      id: laneId,
+    };
 
-    onEditLane: function(laneId, name) {
-      var updatedLane = {
-        id: laneId
-      };
-
-      if(name) {
-        updatedLane.name = name;
-        updatedLane.editing = false;
-      } else {
-        updatedLane.editing = true;
-      }
-
-      dispatch( lanesActions.updateLane(updatedLane) );
-    },
-
-    onDeleteLane: function(laneId) {
-      dispatch( lanesActions.deleteLane(laneId) );
-    },
-
-    onMoveLane: function(sourceId, targetId) {
-      dispatch( lanesActions.move('lane', sourceId, targetId) );
+    if(name) {
+      updatedLane.name = name;
+      updatedLane.editing = false;
+    } else {
+      updatedLane.editing = true;
     }
-  };
-};
 
-module.exports = DragDropContext(HTML5Backend)(
+    dispatch(lanesActions.updateLane(updatedLane));
+  },
+
+  onDeleteLane(laneId) {
+    dispatch(lanesActions.deleteLane(laneId));
+  },
+
+  onMoveLane(sourceId, targetId) {
+    dispatch(lanesActions.move('lane', sourceId, targetId));
+  },
+});
+
+export default DragDropContext(HTML5Backend)(
   connect(mapStateToProps, mapDispatchToProps)(App)
 );

@@ -1,34 +1,32 @@
-var types = require('../actions/constants');
-var uuid = require('uuid');
-var update = require('react-addons-update');
+import * as actionTypes from '../constants/actionTypes';
+import uuid from 'uuid';
+import update from 'react-addons-update';
 
-var initialState = [
+const defaultState = [
   {
     id: uuid.v4(),
     name: 'Todo',
-    notes: []
+    notes: [],
   },
   {
     id: uuid.v4(),
     name: 'In Progress',
-    notes: []
+    notes: [],
   },
   {
     id: uuid.v4(),
     name: 'Review',
-    notes: []
-  }
+    notes: [],
+  },
 ];
 
-module.exports = function(state, action) {
-  state = state || initialState;
-
+export default function lanes(state = defaultState, action) {
   switch (action.type) {
-    case types.CREATE_LANE:
+    case actionTypes.CREATE_LANE:
       return state.concat(action.payload);
 
-    case types.UPDATE_LANE:
-      return state.map(function(lane) {
+    case actionTypes.UPDATE_LANE:
+      return state.map(lane => {
         if(lane.id === action.payload.id) {
           return Object.assign({}, lane, action.payload);
         }
@@ -36,94 +34,66 @@ module.exports = function(state, action) {
         return lane;
       });
 
-    case types.DELETE_LANE:
-      return state.filter(function(lane) {
-        return lane.id !== action.payload.id;
-      });
+    case actionTypes.DELETE_LANE:
+      return state.filter(lane => lane.id !== action.payload.id);
 
-    case types.ATTACH_TO_LANE:
-      var laneId = action.payload.laneId;
-      var noteId = action.payload.noteId;
-      var noteIndex;
+    case actionTypes.ATTACH_TO_LANE: {
+      const laneId = action.payload.laneId;
+      const noteId = action.payload.noteId;
+      let noteIndex;
 
-      return state.map(function(lane) {
+      return state.map(lane => {
         noteIndex = lane.notes.indexOf(noteId);
         if(~noteIndex) {
           return Object.assign({}, lane, {
-            notes: lane.notes.filter(function(id) {
-              return id !== noteId;
-            })
+            notes: lane.notes.filter(id => id !== noteId),
           });
         }
 
         if(lane.id === laneId) {
           return Object.assign({}, lane, {
-            notes: lane.notes.concat(noteId)
+            notes: lane.notes.concat(noteId),
           });
         }
 
         return lane;
       });
+    }
 
-    case types.DETACH_FROM_LANE:
-      var laneId = action.payload.laneId; //eslint-disable-line no-redeclare
-      var noteId = action.payload.noteId; //eslint-disable-line no-redeclare
+    case actionTypes.DETACH_FROM_LANE: {
+      const laneId = action.payload.laneId;
+      const noteId = action.payload.noteId;
 
-      return state.map(function(lane) {
+      return state.map(lane => {
         if(lane.id === laneId) {
           return Object.assign({}, lane, {
-            notes: lane.notes.filter(function(id) {
-              return id !== noteId;
-            })
+            notes: lane.notes.filter(id => id !== noteId),
           });
         }
 
         return lane;
       });
+    }
 
-    case types.MOVE_NOTE:
-      var sourceId = action.payload.sourceId;
-      var targetId = action.payload.targetId;
+    case actionTypes.MOVE_NOTE: {
+      const sourceId = action.payload.sourceId;
+      const targetId = action.payload.targetId;
       console.log(sourceId, targetId);
-      var sourceLane = state.filter(function(lane) {
-        return ~lane.notes.indexOf(sourceId);
-      })[0];
-      var targetLane = state.filter(function(lane) {
-        return ~lane.notes.indexOf(targetId);
-      })[0];
-      var sourceNoteIndex = sourceLane.notes.indexOf(sourceId);
-      var targetNoteIndex = targetLane.notes.indexOf(targetId);
+      const sourceLane = state.filter(lane => ~lane.notes.indexOf(sourceId))[0];
+      const targetLane = state.filter(lane => ~lane.notes.indexOf(targetId))[0];
+      const sourceNoteIndex = sourceLane.notes.indexOf(sourceId);
+      const targetNoteIndex = targetLane.notes.indexOf(targetId);
 
       if(sourceLane.id === targetLane.id) {
-        return state.map(function(lane) {
+        return state.map(lane => {
           if(lane.id === sourceLane.id) {
             return Object.assign({}, lane, {
               notes: update(sourceLane.notes, {
                 $splice: [
                   [sourceNoteIndex, 1],
-                  [targetNoteIndex, 0, sourceId]
-                ]
-              })
-            });
-          }
-
-          return lane;
-        });
-      } else {
-        return state.map(function(lane) {
-          if(lane.id === sourceLane.id) {
-            return Object.assign({}, lane, {
-              notes: update(lane.notes, {
-                $splice: [[sourceNoteIndex, 1]]
-              })
-            });
-          }
-
-          if(lane.id === targetLane.id) {
-            return Object.assign({}, lane, {
-              notes: update(lane.notes, {
-                $splice: [[targetNoteIndex, 0, sourceId]]
-              })
+                  [targetNoteIndex, 0, sourceId],
+                ],
+              }),
             });
           }
 
@@ -131,27 +101,43 @@ module.exports = function(state, action) {
         });
       }
 
-    case types.MOVE_LANE:
-      var sourceId = action.payload.sourceId; //eslint-disable-line no-redeclare
-      var targetId = action.payload.targetId; //eslint-disable-line no-redeclare
-      var sourceLane = state.find(function(lane) { //eslint-disable-line no-redeclare
-        return lane.id === sourceId;
+      return state.map(lane => {
+        if(lane.id === sourceLane.id) {
+          return Object.assign({}, lane, {
+            notes: update(lane.notes, {
+              $splice: [[sourceNoteIndex, 1]],
+            }),
+          });
+        }
+
+        if(lane.id === targetLane.id) {
+          return Object.assign({}, lane, {
+            notes: update(lane.notes, {
+              $splice: [[targetNoteIndex, 0, sourceId]],
+            }),
+          });
+        }
+
+        return lane;
       });
-      var sourceLaneIndex = state.findIndex(function(lane) {
-        return lane.id === sourceId;
-      });
-      var targetLaneIndex = state.findIndex(function(lane) {
-        return lane.id === targetId;
-      });
+    }
+
+    case actionTypes.MOVE_LANE: {
+      const sourceId = action.payload.sourceId;
+      const targetId = action.payload.targetId;
+      const sourceLane = state.find(lane => lane.id === sourceId);
+      const sourceLaneIndex = state.findIndex(lane => lane.id === sourceId);
+      const targetLaneIndex = state.findIndex(lane => lane.id === targetId);
 
       return update(state, {
         $splice: [
           [sourceLaneIndex, 1],
-          [targetLaneIndex, 0, sourceLane]
-        ]
+          [targetLaneIndex, 0, sourceLane],
+        ],
       });
+    }
 
     default:
       return state;
   }
-};
+}

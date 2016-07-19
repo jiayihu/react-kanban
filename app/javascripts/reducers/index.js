@@ -1,8 +1,8 @@
-var combineReducers = require('redux').combineReducers;
-var lanesReducer = require('./lanes');
-var notesReducer = require('./notes');
+import { combineReducers } from 'redux';
+import lanesReducer from './lanes';
+import notesReducer from './notes';
 
-module.exports = combineReducers({
+export default combineReducers({
   lanes: lanesReducer,
-  notes: notesReducer
+  notes: notesReducer,
 });

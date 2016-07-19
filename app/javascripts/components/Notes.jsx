@@ -1,26 +1,25 @@
-var React = require('react');
-var Note = require('../containers/Note.jsx'); //eslint-disable-line no-unused-vars
-var Editable = require('./Editable.jsx'); //eslint-disable-line no-unused-vars
+import React, { PropTypes } from 'react';
+import Note from '../containers/Note.jsx';
+import Editable from './Editable.jsx';
 
-var Notes = React.createClass({
-  render: function() {
-    var notes = this.props.notes.map(function(note) {
-      return (
-        <Note
+export default class Notes extends React.Component {
+  render() {
+    const notes = this.props.notes.map(note => (
+      <Note
+        id={note.id}
+        key={note.id}
+        onMoveNote={this.props.onMoveNote}
+      >
+        <Editable
+          editing={note.editing}
           id={note.id}
-          key={note.id}
-          onMoveNote={this.props.onMoveNote}
-        >
-          <Editable
-            editing={note.editing}
-            value={note.text}
-            onDelete={this.props.onDeleteNote.bind(null, note.id)}
-            onEdit={this.props.onEditNote.bind(null, note.id)}
-            onValueClick={this.props.onValueClick.bind(null, note.id)}
-          />
-        </Note>
-      );
-    }.bind(this));
+          value={note.text}
+          onDelete={this.props.onDeleteNote}
+          onEdit={this.props.onEditNote}
+          onValueClick={this.props.onValueClick}
+        />
+      </Note>
+    ));
 
     return (
       <ul className="notes-list">
@@ -28,6 +27,12 @@ var Notes = React.createClass({
       </ul>
     );
   }
-});
+}
 
-module.exports = Notes;
+Notes.propTypes = {
+  notes: PropTypes.array.isRequired,
+  onDeleteNote: PropTypes.func.isRequired,
+  onEditNote: PropTypes.func.isRequired,
+  onMoveNote: PropTypes.func.isRequired,
+  onValueClick: PropTypes.func.isRequired,
+};

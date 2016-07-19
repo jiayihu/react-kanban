@@ -1,20 +1,24 @@
-var React = require('react');
+import React, { PropTypes } from 'react';
 
-module.exports = React.createClass({
-  render: function() {
-    var connectDragSource = this.props.connectDragSource;
-    var connectDropTarget = this.props.connectDropTarget;
-    var isDragging = this.props.isDragging;
+export default class Note extends React.Component {
+  render() {
+    const connectDragSource = this.props.connectDragSource;
+    const connectDropTarget = this.props.connectDropTarget;
+    const isDragging = this.props.isDragging;
 
     return connectDragSource(
       connectDropTarget(
-        <li
-          style={{
-            opacity: isDragging? 0 : 1
-          }}
-          className="note" >
+        <li style={{ opacity: isDragging ? 0 : 1 }} className="note" >
           {this.props.children}
-        </li>)
+        </li>
+      )
     );
   }
-});
+}
+
+Note.propTypes = {
+  children: PropTypes.node,
+  connectDragSource: PropTypes.func.isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
+  isDragging: PropTypes.bool,
+};

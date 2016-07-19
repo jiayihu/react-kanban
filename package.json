@@ -7,10 +7,11 @@
     "url": "git@github.com:jiayihu/react-kanban.git"
   },
   "scripts": {
-    "build": "NODE_ENV=production gulp vendorScripts",
+    "build": "npm run clean && npm run build:vendor && NODE_ENV=production gulp production",
+    "build:vendor": "NODE_ENV=production gulp vendorScripts",
     "clean": "rm -rf ./public && mkdir ./public ",
-    "dev": "gulp",
-    "production": "npm run clean && NODE_ENV=production gulp production",
+    "deploy": "npm run build && gulp deploy",
+    "start": "gulp",
     "test": "mocha --recursive --compilers js:babel-register"
   },
   "author": "jiayi hu",
@@ -60,7 +61,7 @@
     "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.0",
-    "redux": "^3.3.1",
+    "redux": "^3.5.2",
     "uuid": "^2.0.1"
   }
 }
