@@ -7,7 +7,7 @@
     "url": "git@github.com:jiayihu/react-kanban.git"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:vendor && NODE_ENV=production gulp production",
+    "build": "npm run clean && NODE_ENV=production gulp production",
     "clean": "rm -rf ./public && mkdir ./public ",
     "deploy": "npm run build && gulp deploy",
     "start": "gulp",

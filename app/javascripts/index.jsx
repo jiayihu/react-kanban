@@ -15,6 +15,8 @@ function onReset() {
 }
 
 localStore.getItem('state')
+  // If value is null ES6 default params don't work
+  .then(value => (value = value || undefined))
   .then(value => configStore(value), (err) => {
     console.error(err);
     return configStore(null);
