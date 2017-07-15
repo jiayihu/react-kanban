@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import actions from '../../app/javascripts/actions/lanes';
-import * as actionTypes from '../../app/javascripts/constants/actionTypes';
+import actions from '../../src/actions/lanes';
+import * as actionTypes from '../../src/constants/actionTypes';
 import uuid from 'uuid';
 
 describe('lanes actions', function description() {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import reducer from '../../app/javascripts/reducers/notes';
-import * as actionTypes from '../../app/javascripts/constants/actionTypes';
+import reducer from '../../src/reducers/notes';
+import * as actionTypes from '../../src/constants/actionTypes';
 import uuid from 'uuid';
 
 describe('notes reducer', () => {
@@ -23,10 +23,12 @@ describe('notes reducer', () => {
 
   it('should handle UPDATE_NOTE', () => {
     const v4Id = uuid.v4();
-    const oldState = [{
-      id: v4Id,
-      text: 'Old task',
-    }];
+    const oldState = [
+      {
+        id: v4Id,
+        text: 'Old task',
+      },
+    ];
     const updateAction = {
       type: actionTypes.UPDATE_NOTE,
       payload: {
@@ -40,10 +42,12 @@ describe('notes reducer', () => {
 
   it('should handle DELETE_NOTE', () => {
     const v4Id = uuid.v4();
-    const oldState = [{
-      id: v4Id,
-      text: 'Old task',
-    }];
+    const oldState = [
+      {
+        id: v4Id,
+        text: 'Old task',
+      },
+    ];
     const deleteAction = {
       type: actionTypes.DELETE_NOTE,
       payload: {
