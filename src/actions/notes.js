@@ -1,29 +1,17 @@
+// @flow
+
 import uuid from 'uuid';
+import { isV4 } from '../helpers';
 import * as actionTypes from '../constants/actionTypes';
 
-/**
- * Checks if String is valid v4 id
- * @param  {String} id Id to be checked
- * @return {Boolean}
- */
-function isV4(id) {
-  if (typeof id !== 'string') {
-    return false;
-  }
-
-  return /^[a-z0-9]{8}-[a-z0-9]{4}-4[a-z0-9]{3}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(id);
-}
+import type { Action, Note } from '../types';
 
 /**
  * Returns the action to create a note
  * @param  {String} text Note text
  * @return {Object}
  */
-function createNote(text) {
-  if (typeof text !== 'string') {
-    throw new Error(`params ${text}`);
-  }
-
+function createNote(text: string): Action {
   return {
     type: actionTypes.CREATE_NOTE,
     payload: {
@@ -36,13 +24,10 @@ function createNote(text) {
 
 /**
  * Returns the action to update a note
- * @param  {Object} updatedNote Object with note properties to update. It must
- * have a valid id.
- * @return {Object}
  */
-function updateNote(updatedNote) {
-  if (typeof updatedNote !== 'object' || !isV4(updatedNote.id)) {
-    throw new Error(`params ${updatedNote}`);
+function updateNote(updatedNote: Note): Action {
+  if (!isV4(updatedNote.id)) {
+    throw new Error(`params have not valid uuids ${JSON.stringify(updatedNote)}`);
   }
 
   return {
@@ -53,12 +38,10 @@ function updateNote(updatedNote) {
 
 /**
  * Returns the action to delete a note
- * @param  {String} id Note id
- * @return {Object}
  */
-function deleteNote(id) {
+function deleteNote(id: string): Action {
   if (!isV4(id)) {
-    throw new Error(`params ${id}`);
+    throw new Error(`params have not valid uuids ${id}`);
   }
 
   return {

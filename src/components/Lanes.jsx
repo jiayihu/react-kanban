@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PropTypes } from 'react';
 import Lane from '../containers/Lane.jsx';
 

@@ -1,6 +1,12 @@
+// @flow
+
 import * as actionTypes from '../constants/actionTypes';
 
-export default function notes(state = [], action) {
+import type { Action, Note } from '../types';
+
+export type NotesState = $ReadOnlyArray<Note>;
+
+export default function notes(state: NotesState = [], action: Action): NotesState {
   switch (action.type) {
     case actionTypes.CREATE_NOTE:
       return state.concat(action.payload);

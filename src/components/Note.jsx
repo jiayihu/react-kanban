@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PropTypes } from 'react';
 
 export default class Note extends React.Component {

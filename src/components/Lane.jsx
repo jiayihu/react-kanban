@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PropTypes } from 'react';
 import Notes from './Notes.jsx';
 import Editable from './Editable.jsx';
@@ -5,9 +7,9 @@ import Editable from './Editable.jsx';
 export default class Lane extends React.Component {
   constructor() {
     super();
-    this.handleCreateNote = this.handleCreateNote.bind(this);
-    this.handleDeleteLane = this.handleDeleteLane.bind(this);
-    this.handleDeleteNote = this.handleDeleteNote.bind(this);
+    (this: any).handleCreateNote = this.handleCreateNote.bind(this);
+    (this: any).handleDeleteLane = this.handleDeleteLane.bind(this);
+    (this: any).handleDeleteNote = this.handleDeleteNote.bind(this);
   }
 
   handleCreateNote() {
@@ -20,7 +22,7 @@ export default class Lane extends React.Component {
     lane.notes.forEach(noteId => this.props.onDeleteNote(null, noteId));
   }
 
-  handleDeleteNote(noteId) {
+  handleDeleteNote(noteId: string) {
     this.props.onDeleteNote(this.props.lane.id, noteId);
   }
 

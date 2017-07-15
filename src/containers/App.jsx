@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PropTypes } from 'react';
 
 import lanesActions from '../actions/lanes';
@@ -48,15 +50,15 @@ const mapDispatchToProps = dispatch => ({
   },
 
   onEditLane(laneId, name) {
-    const updatedLane = {
+    const updatedLane: any = {
       id: laneId,
     };
 
     if (name) {
-      updatedLane.name = name;
-      updatedLane.editing = false;
+      (updatedLane: any).name = name;
+      (updatedLane: any).editing = false;
     } else {
-      updatedLane.editing = true;
+      (updatedLane: any).editing = true;
     }
 
     dispatch(lanesActions.updateLane(updatedLane));

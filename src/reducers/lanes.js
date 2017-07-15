@@ -1,26 +1,35 @@
+// @flow
+
 import * as actionTypes from '../constants/actionTypes';
 import uuid from 'uuid';
 import update from 'react-addons-update';
 
-const defaultState = [
+import type { Action, Lane } from '../types';
+
+export type LanesState = $ReadOnlyArray<Lane>;
+
+const defaultState: LanesState = [
   {
     id: uuid.v4(),
     name: 'Todo',
+    editing: false,
     notes: [],
   },
   {
     id: uuid.v4(),
     name: 'In Progress',
+    editing: false,
     notes: [],
   },
   {
     id: uuid.v4(),
     name: 'Review',
+    editing: false,
     notes: [],
   },
 ];
 
-export default function lanes(state = defaultState, action) {
+export default function lanes(state: LanesState = defaultState, action: Action): LanesState {
   switch (action.type) {
     case actionTypes.CREATE_LANE:
       return state.concat(action.payload);

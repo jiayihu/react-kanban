@@ -1,7 +1,11 @@
+// @flow
+
 import { createStore, compose } from 'redux';
 import rootReducer from './reducers/';
 
-export default function configStore(initialState = {}) {
+import type { State } from './reducers/index';
+
+export default function configStore(initialState?: State) {
   return createStore(
     rootReducer,
     initialState,

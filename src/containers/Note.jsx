@@ -1,3 +1,5 @@
+// @flow
+
 import Note from '../components/Note.jsx';
 import { DragSource } from 'react-dnd';
 import { DropTarget } from 'react-dnd';

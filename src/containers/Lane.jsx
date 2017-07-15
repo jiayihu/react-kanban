@@ -1,3 +1,5 @@
+// @flow
+
 import Lane from '../components/Lane.jsx';
 import lanesActions from '../actions/lanes';
 import notesActions from '../actions/notes';
@@ -65,7 +67,7 @@ const mapDispatchToProps = dispatch => ({
   },
 
   onEditNote(noteId, value) {
-    const updatedNote = {
+    const updatedNote: any = {
       id: noteId,
     };
 

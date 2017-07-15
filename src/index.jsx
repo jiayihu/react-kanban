@@ -1,3 +1,5 @@
+// @flow
+
 import './stylesheets/main.scss';
 
 import React from 'react';
@@ -19,21 +21,25 @@ function onReset() {
 localStore
   .getItem('state')
   // If value is null ES6 default params don't work
-  .then(value => (value = value || undefined))
+  .then(
+    value => (value = value || undefined),
+    err => {
+      console.error(err);
+      return undefined;
+    }
+  )
   .then(
     value => configStore(value),
     err => {
       console.error(err);
-      return configStore(null);
+      return configStore();
     }
   )
   .then(store => {
     ReactDOM.render(
-      <div>
-        <Provider store={store}>
-          <App onReset={onReset} />
-        </Provider>
-      </div>,
+      <Provider store={store}>
+        <App onReset={onReset} />
+      </Provider>,
       document.querySelector('.app')
     );
 

@@ -7,22 +7,19 @@
     "no-param-reassign": 0,
     "prefer-arrow-callback": [2, { "allowNamedFunctions": true }],
     "react/prefer-stateless-function": 0,
-    "valid-jsdoc": [
-      2,
-      {
-        "requireReturn": false,
-        "requireReturnDescription": false
-      }
-    ]
+    "valid-jsdoc": [0]
   },
 
   "env": {
     "mocha": true
   },
 
+  "parser": "babel-eslint",
+
   "plugins": [
+    "flowtype",
     "react"
   ],
 
-  "extends": ["eslint:recommended", "airbnb"]
+  "extends": ["eslint:recommended", "airbnb", "plugin:flowtype/recommended"]
 }

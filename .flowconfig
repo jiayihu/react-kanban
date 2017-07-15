@@ -1,0 +1,11 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[options]
+emoji=true
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/flow/CSSModuleStub.js'
+
+[lints]

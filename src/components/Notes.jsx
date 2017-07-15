@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PropTypes } from 'react';
 import Note from '../containers/Note.jsx';
 import Editable from './Editable.jsx';
