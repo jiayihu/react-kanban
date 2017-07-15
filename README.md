@@ -6,7 +6,10 @@
 
 ![Screenshot](https://raw.githubusercontent.com/jiayihu/react-kanban/master/screenshot.png)
 
-## TODO
- - [x] Draggable Lanes
- - [x] Refactor in ES6
- - [ ] Add authentication
+## Phases
+
+The project went under different phases of development:
+
+1. [ES5 + Browserify version](https://github.com/jiayihu/react-kanban/tree/e72801d9932c36d244f507d2f4f390d34f411433)
+2. [ES6 + Browserify version](https://github.com/jiayihu/react-kanban/tree/337b72abc895817723493abffb4e0724e6b8aa29)
+3. ES6 + Webpack version: **current**

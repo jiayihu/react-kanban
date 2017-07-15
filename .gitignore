@@ -3,7 +3,7 @@ node_modules
 .publish
 .tmp
 app.yaml
-public
+dist
 
 # Compiled source #
 ###################
