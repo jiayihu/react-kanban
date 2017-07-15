@@ -1,10 +1,10 @@
 // @flow
 
 import uuid from 'uuid';
-import { isV4 } from '../helpers';
-import * as actionTypes from '../constants/actionTypes';
+import { isV4 } from '../../helpers';
+import * as actionTypes from '../../constants/actionTypes';
 
-import type { Action, Lane } from '../types';
+import type { Action, Lane } from '../../types';
 
 /**
  * Returns a createLane action

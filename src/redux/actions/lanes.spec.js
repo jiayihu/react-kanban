@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import actions from '../../src/actions/lanes';
-import * as actionTypes from '../../src/constants/actionTypes';
+import actions from './lanes';
+import * as actionTypes from '../../constants/actionTypes';
 import uuid from 'uuid';
 
 describe('lanes actions', function description() {
@@ -89,7 +89,6 @@ describe('lanes actions', function description() {
   });
 
   it('should throw an error', () => {
-    expect(actions.createLane.bind(null, {})).to.throw(Error);
     expect(actions.attachToLane.bind(null, 1, 'invalidId')).to.throw(Error);
     expect(actions.detachFromLane.bind(null, 1, 'invalidId')).to.throw(Error);
   });

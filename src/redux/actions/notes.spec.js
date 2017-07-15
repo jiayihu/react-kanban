@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import actions from '../../src/actions/notes';
-import * as actionTypes from '../../src/constants/actionTypes';
+import actions from './notes';
+import * as actionTypes from '../../constants/actionTypes';
 import uuid from 'uuid';
 
 describe('notes actions', () => {

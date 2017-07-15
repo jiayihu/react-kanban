@@ -1,3 +1,5 @@
+@import '../../stylesheets/variables';
+
 .add-note {
   background-color: $accent-sec;
   height: 2em;
@@ -17,7 +19,7 @@
 }
 
 .note {
-  background-image: url('../images/drag-pattern.png');
+  background-image: url('./drag-pattern.png');
   background-position: left center;
   background-repeat: no-repeat;
   border-left: 2px solid $primary;

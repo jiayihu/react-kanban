@@ -1,8 +1,8 @@
 // @flow
 
 import Lane from '../components/Lane.jsx';
-import lanesActions from '../actions/lanes';
-import notesActions from '../actions/notes';
+import lanesActions from '../redux/actions/lanes';
+import notesActions from '../redux/actions/notes';
 import { connect } from 'react-redux';
 import { DragSource } from 'react-dnd';
 import { DropTarget } from 'react-dnd';

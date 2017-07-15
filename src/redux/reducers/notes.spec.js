@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import reducer from '../../src/reducers/notes';
-import * as actionTypes from '../../src/constants/actionTypes';
+import reducer from './notes';
+import * as actionTypes from '../../constants/actionTypes';
 import uuid from 'uuid';
 
 describe('notes reducer', () => {

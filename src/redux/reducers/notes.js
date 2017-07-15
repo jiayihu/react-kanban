@@ -1,8 +1,8 @@
 // @flow
 
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from '../../constants/actionTypes';
 
-import type { Action, Note } from '../types';
+import type { Action, Note } from '../../types';
 
 export type NotesState = $ReadOnlyArray<Note>;
 

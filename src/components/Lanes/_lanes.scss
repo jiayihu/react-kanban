@@ -1,3 +1,5 @@
+@import '../../stylesheets/variables';
+
 .add-lane {
   background-color: $primary;
   margin-bottom: .4em;
@@ -76,7 +78,7 @@
 
   &__drag {
     background-color: $white;
-    background-image: url('../images/drag-cursor.png');
+    background-image: url('./drag-cursor.png');
     background-position: center;
     border: 1px solid lighten($gray-light, 10%);
     box-shadow: none;

@@ -1,8 +1,10 @@
 // @flow
 
+import './_notes.scss';
+
 import React, { PropTypes } from 'react';
-import Note from '../containers/Note.jsx';
-import Editable from './Editable.jsx';
+import Note from '../../containers/Note.jsx';
+import Editable from '../Editable.jsx';
 
 export default class Notes extends React.Component {
   render() {

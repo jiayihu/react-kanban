@@ -2,9 +2,9 @@
 
 import React, { PropTypes } from 'react';
 
-import lanesActions from '../actions/lanes';
+import lanesActions from '../redux/actions/lanes';
 import { connect } from 'react-redux';
-import Lanes from '../components/Lanes.jsx';
+import Lanes from '../components/Lanes/Lanes.jsx';
 
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';

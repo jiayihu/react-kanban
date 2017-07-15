@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PropTypes } from 'react';
-import Notes from './Notes.jsx';
+import Notes from './Notes/Notes.jsx';
 import Editable from './Editable.jsx';
 
 export default class Lane extends React.Component {

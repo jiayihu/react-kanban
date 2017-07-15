@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import reducer from '../../src/reducers/lanes';
-import * as actionTypes from '../../src/constants/actionTypes';
+import reducer from './lanes';
+import * as actionTypes from '../../constants/actionTypes';
 
 describe('lanes reducer', () => {
   it('should return the initial state', () => {

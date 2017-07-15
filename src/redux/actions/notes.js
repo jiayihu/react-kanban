@@ -1,10 +1,10 @@
 // @flow
 
 import uuid from 'uuid';
-import { isV4 } from '../helpers';
-import * as actionTypes from '../constants/actionTypes';
+import { isV4 } from '../../helpers';
+import * as actionTypes from '../../constants/actionTypes';
 
-import type { Action, Note } from '../types';
+import type { Action, Note } from '../../types';
 
 /**
  * Returns the action to create a note
