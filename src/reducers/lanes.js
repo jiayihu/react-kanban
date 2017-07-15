@@ -27,7 +27,7 @@ export default function lanes(state = defaultState, action) {
 
     case actionTypes.UPDATE_LANE:
       return state.map(lane => {
-        if(lane.id === action.payload.id) {
+        if (lane.id === action.payload.id) {
           return Object.assign({}, lane, action.payload);
         }
 
@@ -44,13 +44,13 @@ export default function lanes(state = defaultState, action) {
 
       return state.map(lane => {
         noteIndex = lane.notes.indexOf(noteId);
-        if(~noteIndex) {
+        if (~noteIndex) {
           return Object.assign({}, lane, {
             notes: lane.notes.filter(id => id !== noteId),
           });
         }
 
-        if(lane.id === laneId) {
+        if (lane.id === laneId) {
           return Object.assign({}, lane, {
             notes: lane.notes.concat(noteId),
           });
@@ -65,7 +65,7 @@ export default function lanes(state = defaultState, action) {
       const noteId = action.payload.noteId;
 
       return state.map(lane => {
-        if(lane.id === laneId) {
+        if (lane.id === laneId) {
           return Object.assign({}, lane, {
             notes: lane.notes.filter(id => id !== noteId),
           });
@@ -84,15 +84,12 @@ export default function lanes(state = defaultState, action) {
       const sourceNoteIndex = sourceLane.notes.indexOf(sourceId);
       const targetNoteIndex = targetLane.notes.indexOf(targetId);
 
-      if(sourceLane.id === targetLane.id) {
+      if (sourceLane.id === targetLane.id) {
         return state.map(lane => {
-          if(lane.id === sourceLane.id) {
+          if (lane.id === sourceLane.id) {
             return Object.assign({}, lane, {
               notes: update(sourceLane.notes, {
-                $splice: [
-                  [sourceNoteIndex, 1],
-                  [targetNoteIndex, 0, sourceId],
-                ],
+                $splice: [[sourceNoteIndex, 1], [targetNoteIndex, 0, sourceId]],
               }),
             });
           }
@@ -102,7 +99,7 @@ export default function lanes(state = defaultState, action) {
       }
 
       return state.map(lane => {
-        if(lane.id === sourceLane.id) {
+        if (lane.id === sourceLane.id) {
           return Object.assign({}, lane, {
             notes: update(lane.notes, {
               $splice: [[sourceNoteIndex, 1]],
@@ -110,7 +107,7 @@ export default function lanes(state = defaultState, action) {
           });
         }
 
-        if(lane.id === targetLane.id) {
+        if (lane.id === targetLane.id) {
           return Object.assign({}, lane, {
             notes: update(lane.notes, {
               $splice: [[targetNoteIndex, 0, sourceId]],
@@ -130,10 +127,7 @@ export default function lanes(state = defaultState, action) {
       const targetLaneIndex = state.findIndex(lane => lane.id === targetId);
 
       return update(state, {
-        $splice: [
-          [sourceLaneIndex, 1],
-          [targetLaneIndex, 0, sourceLane],
-        ],
+        $splice: [[sourceLaneIndex, 1], [targetLaneIndex, 0, sourceLane]],
       });
     }
 

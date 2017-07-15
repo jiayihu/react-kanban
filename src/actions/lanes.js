@@ -7,7 +7,7 @@ import * as actionTypes from '../constants/actionTypes';
  * @return {Boolean}
  */
 function isV4(id) {
-  if(typeof id !== 'string') {
+  if (typeof id !== 'string') {
     return false;
   }
 
@@ -20,7 +20,7 @@ function isV4(id) {
  * @return {Object}
  */
 function createLane(name) {
-  if(typeof name !== 'string') {
+  if (typeof name !== 'string') {
     throw new Error(`params ${name}`);
   }
 
@@ -46,7 +46,7 @@ function createLane(name) {
  * })
  */
 function updateLane(updatedLane) {
-  if((typeof updatedLane !== 'object') || (!isV4(updatedLane.id))) {
+  if (typeof updatedLane !== 'object' || !isV4(updatedLane.id)) {
     throw new Error(`params ${updatedLane}`);
   }
 
@@ -62,7 +62,7 @@ function updateLane(updatedLane) {
  * @return {Object}
  */
 function deleteLane(id) {
-  if(!isV4(id)) {
+  if (!isV4(id)) {
     throw new Error(`params ${id}`);
   }
 
@@ -81,7 +81,7 @@ function deleteLane(id) {
  * @return {Object}
  */
 function attachToLane(laneId, noteId) {
-  if((!isV4(laneId)) || (!isV4(noteId))) {
+  if (!isV4(laneId) || !isV4(noteId)) {
     throw new Error(`params ${laneId} ${noteId}`);
   }
 
@@ -101,7 +101,7 @@ function attachToLane(laneId, noteId) {
  * @return {Object}
  */
 function detachFromLane(laneId, noteId) {
-  if((!isV4(laneId)) || (!isV4(noteId))) {
+  if (!isV4(laneId) || !isV4(noteId)) {
     throw new Error(`params ${laneId} ${noteId}`);
   }
 
@@ -122,7 +122,7 @@ function detachFromLane(laneId, noteId) {
  * @return {Object}
  */
 function move(target, sourceId, targetId) {
-  if((typeof target !== 'string') || (!isV4(sourceId)) || (!isV4(targetId))) {
+  if (typeof target !== 'string' || !isV4(sourceId) || !isV4(targetId)) {
     throw new Error(`params ${target} ${sourceId} ${targetId}`);
   }
 

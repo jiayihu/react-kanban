@@ -7,7 +7,7 @@ import * as actionTypes from '../constants/actionTypes';
  * @return {Boolean}
  */
 function isV4(id) {
-  if(typeof id !== 'string') {
+  if (typeof id !== 'string') {
     return false;
   }
 
@@ -20,7 +20,7 @@ function isV4(id) {
  * @return {Object}
  */
 function createNote(text) {
-  if(typeof text !== 'string') {
+  if (typeof text !== 'string') {
     throw new Error(`params ${text}`);
   }
 
@@ -41,7 +41,7 @@ function createNote(text) {
  * @return {Object}
  */
 function updateNote(updatedNote) {
-  if((typeof updatedNote !== 'object') || (!isV4(updatedNote.id))) {
+  if (typeof updatedNote !== 'object' || !isV4(updatedNote.id)) {
     throw new Error(`params ${updatedNote}`);
   }
 
@@ -57,7 +57,7 @@ function updateNote(updatedNote) {
  * @return {Object}
  */
 function deleteNote(id) {
-  if(!isV4(id)) {
+  if (!isV4(id)) {
     throw new Error(`params ${id}`);
   }
 

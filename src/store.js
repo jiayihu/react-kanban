@@ -5,8 +5,6 @@ export default function configStore(initialState = {}) {
   return createStore(
     rootReducer,
     initialState,
-    compose(
-      window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
+    compose(window.devToolsExtension ? window.devToolsExtension() : f => f)
   );
 }

@@ -7,7 +7,7 @@ export default function notes(state = [], action) {
 
     case actionTypes.UPDATE_NOTE:
       return state.map(note => {
-        if(note.id === action.payload.id) {
+        if (note.id === action.payload.id) {
           return Object.assign({}, note, action.payload);
         }
         return note;
