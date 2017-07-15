@@ -17,7 +17,7 @@ export default class Lane extends React.Component {
   handleDeleteLane() {
     const lane = this.props.lane;
     this.props.onDeleteLane(lane.id);
-    lane.notes.forEach((noteId) => this.props.onDeleteNote(null, noteId));
+    lane.notes.forEach(noteId => this.props.onDeleteNote(null, noteId));
   }
 
   handleDeleteNote(noteId) {
@@ -45,15 +45,10 @@ export default class Lane extends React.Component {
               onEdit={this.props.onEditLane}
               onValueClick={this.props.onEditLane}
             />
-            <button
-              className="lane__delete"
-              onClick={this.handleDeleteLane}
-            >-</button>
-            {
-              connectDragSource(
-                <button className="lane__drag" />
-              )
-            }
+            <button className="lane__delete" onClick={this.handleDeleteLane}>
+              -
+            </button>
+            {connectDragSource(<button className="lane__drag" />)}
           </h2>
           <Notes
             notes={laneNotes}
@@ -62,7 +57,7 @@ export default class Lane extends React.Component {
             onValueClick={this.props.onEditNote}
             onMoveNote={this.props.onMoveNote}
           />
-          <button className="add-note" onClick={this.handleCreateNote} >
+          <button className="add-note" onClick={this.handleCreateNote}>
             + note
           </button>
         </div>

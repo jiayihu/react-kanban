@@ -18,34 +18,34 @@ export default class Editable extends React.Component {
   }
 
   handleFinishEdit(e) {
-    if((e.type === 'keypress') && (e.key !== 'Enter')) {
+    if (e.type === 'keypress' && e.key !== 'Enter') {
       return;
     }
 
     const value = e.target.value;
 
-    if(this.props.onEdit && value.trim().length) {
+    if (this.props.onEdit && value.trim().length) {
       this.props.onEdit(this.props.id, value);
     }
   }
 
   selectToEnd(input) {
-    if(input) {
+    if (input) {
       input.selectionEnd = this.props.value.length;
     }
   }
 
   renderEdit() {
     return (
-        <input
-          type="text"
-          autoFocus
-          className="editing"
-          ref={this.selectToEnd}
-          defaultValue={this.props.value}
-          onBlur={this.handleFinishEdit}
-          onKeyPress={this.handleFinishEdit}
-        />
+      <input
+        type="text"
+        autoFocus
+        className="editing"
+        ref={this.selectToEnd}
+        defaultValue={this.props.value}
+        onBlur={this.handleFinishEdit}
+        onKeyPress={this.handleFinishEdit}
+      />
     );
   }
 
@@ -59,20 +59,20 @@ export default class Editable extends React.Component {
 
   renderValue() {
     return (
-        <span>
-          <input
-            type="text"
-            onClick={this.handleValueClick}
-            defaultValue={this.props.value}
-            readOnly
-          />
-          {this.props.onDelete ? this.renderDelete() : null}
-        </span>
+      <span>
+        <input
+          type="text"
+          onClick={this.handleValueClick}
+          defaultValue={this.props.value}
+          readOnly
+        />
+        {this.props.onDelete ? this.renderDelete() : null}
+      </span>
     );
   }
 
   render() {
-    if(this.props.editing) {
+    if (this.props.editing) {
       return this.renderEdit();
     }
 

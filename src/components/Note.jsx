@@ -8,7 +8,7 @@ export default class Note extends React.Component {
 
     return connectDragSource(
       connectDropTarget(
-        <li style={{ opacity: isDragging ? 0 : 1 }} className="note" >
+        <li style={{ opacity: isDragging ? 0 : 1 }} className="note">
           {this.props.children}
         </li>
       )

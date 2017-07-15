@@ -25,9 +25,9 @@ const laneTarget = {
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
     const sourceType = monitor.getItemType();
-    if((!targetProps.lane.notes.length) && sourceType === itemTypes.NOTE) {
+    if (!targetProps.lane.notes.length && sourceType === itemTypes.NOTE) {
       targetProps.attachToLane(targetId, sourceId);
-    } else if((targetId !== sourceId) && (sourceType === itemTypes.LANE)) {
+    } else if (targetId !== sourceId && sourceType === itemTypes.LANE) {
       targetProps.onMoveLane(sourceId, targetId);
     }
   },
@@ -39,15 +39,15 @@ const collectDragSource = (DnDconnect, monitor) => ({
   isDragging: monitor.isDragging(),
 });
 
-const collectDropTarget = (DnDconnect) => ({
+const collectDropTarget = DnDconnect => ({
   connectDropTarget: DnDconnect.dropTarget(),
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   allNotes: state.notes,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onCreateNote(laneId) {
     const newNote = notesActions.createNote('New note');
     dispatch(newNote);
@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => ({
   onDeleteNote(laneId, noteId) {
     dispatch(notesActions.deleteNote(noteId));
 
-    if(laneId) {
+    if (laneId) {
       dispatch(lanesActions.detachFromLane(laneId, noteId));
     }
   },
@@ -69,7 +69,7 @@ const mapDispatchToProps = (dispatch) => ({
       id: noteId,
     };
 
-    if(value) {
+    if (value) {
       updatedNote.text = value;
       updatedNote.editing = false;
     } else {

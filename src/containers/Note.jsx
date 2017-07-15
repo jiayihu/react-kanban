@@ -22,7 +22,7 @@ const noteTarget = {
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
 
-    if(sourceId !== targetId) {
+    if (sourceId !== targetId) {
       targetProps.onMoveNote(sourceId, targetId);
     }
   },
@@ -33,7 +33,7 @@ const collectDragSource = (connect, monitor) => ({
   isDragging: monitor.isDragging(),
 });
 
-const collectDropTarget = (connect) => ({
+const collectDropTarget = connect => ({
   connectDropTarget: connect.dropTarget(),
 });
 

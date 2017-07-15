@@ -10,7 +10,7 @@
     "build": "npm run clean && NODE_ENV=production webpack",
     "clean": "rm -rf ./dist && mkdir ./dist ",
     "deploy": "gh-pages -d ./dist",
-    "fmt": "prettier --single-quote --print-width 100 --trailing-comma es5 --write \"{src/**/*.js\"",
+    "fmt": "prettier --single-quote --print-width 100 --trailing-comma es5 --write \"src/**/*.js?(x)\"",
     "lint": "eslint ./src --ext js,jsx",
     "prepush": "npm run lint",
     "start": "webpack-dev-server --inline --hot",

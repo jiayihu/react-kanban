@@ -12,16 +12,10 @@ class App extends React.Component {
     return (
       <div className="react-kanban">
         <h1 className="app-title">React.js Kanban</h1>
-        <button
-          className="add-lane"
-          onClick={this.props.onCreateLane}
-        >
+        <button className="add-lane" onClick={this.props.onCreateLane}>
           + Lane
         </button>
-        <button
-          className="reset-store"
-          onClick={this.props.onReset}
-        >
+        <button className="reset-store" onClick={this.props.onReset}>
           Reset persisted store
         </button>
         <Lanes
@@ -44,11 +38,11 @@ App.propTypes = {
   onReset: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   lanes: state.lanes,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onCreateLane() {
     dispatch(lanesActions.createLane('Active'));
   },
@@ -58,7 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
       id: laneId,
     };
 
-    if(name) {
+    if (name) {
       updatedLane.name = name;
       updatedLane.editing = false;
     } else {
@@ -77,6 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default DragDropContext(HTML5Backend)(
-  connect(mapStateToProps, mapDispatchToProps)(App)
-);
+export default DragDropContext(HTML5Backend)(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -4,12 +4,8 @@ import Editable from './Editable.jsx';
 
 export default class Notes extends React.Component {
   render() {
-    const notes = this.props.notes.map(note => (
-      <Note
-        id={note.id}
-        key={note.id}
-        onMoveNote={this.props.onMoveNote}
-      >
+    const notes = this.props.notes.map(note =>
+      <Note id={note.id} key={note.id} onMoveNote={this.props.onMoveNote}>
         <Editable
           editing={note.editing}
           id={note.id}
@@ -19,7 +15,7 @@ export default class Notes extends React.Component {
           onValueClick={this.props.onValueClick}
         />
       </Note>
-    ));
+    );
 
     return (
       <ul className="notes-list">

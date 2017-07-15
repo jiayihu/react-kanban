@@ -3,7 +3,7 @@ import Lane from '../containers/Lane.jsx';
 
 export default class Lanes extends React.Component {
   render() {
-    const lanes = this.props.lanes.map(lane => (
+    const lanes = this.props.lanes.map(lane =>
       <Lane
         key={lane.id}
         lane={lane}
@@ -11,7 +11,7 @@ export default class Lanes extends React.Component {
         onDeleteLane={this.props.onDeleteLane}
         onMoveLane={this.props.onMoveLane}
       />
-    ));
+    );
 
     return (
       <div className="lanes">
