@@ -4,9 +4,9 @@ import * as actionTypes from '../../constants/actionTypes';
 import uuid from 'uuid';
 import update from 'react-addons-update';
 
-import type { Action, Lane } from '../../types';
+import type { IAction, ILane } from '../../types';
 
-export type LanesState = $ReadOnlyArray<Lane>;
+export type LanesState = $ReadOnlyArray<ILane>;
 
 const defaultState: LanesState = [
   {
@@ -29,7 +29,7 @@ const defaultState: LanesState = [
   },
 ];
 
-export default function lanes(state: LanesState = defaultState, action: Action): LanesState {
+export default function lanes(state: LanesState = defaultState, action: IAction): LanesState {
   switch (action.type) {
     case actionTypes.CREATE_LANE:
       return state.concat(action.payload);

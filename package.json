@@ -13,7 +13,7 @@
     "flow": "flow",
     "fmt": "prettier --single-quote --print-width 100 --trailing-comma es5 --write \"src/**/*.js?(x)\"",
     "lint": "eslint ./src --ext js,jsx && npm run flow",
-    "prepush": "npm run lint",
+    "prepush": "npm run lint && flow",
     "start": "webpack-dev-server --inline --hot",
     "test": "mocha ./src/**/*.spec.js --recursive --require ignore-styles --compilers js:babel-register"
   },

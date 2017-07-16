@@ -4,14 +4,12 @@ import uuid from 'uuid';
 import { isV4 } from '../../helpers';
 import * as actionTypes from '../../constants/actionTypes';
 
-import type { Action, Note } from '../../types';
+import type { IAction, INote } from '../../types';
 
 /**
  * Returns the action to create a note
- * @param  {String} text Note text
- * @return {Object}
  */
-function createNote(text: string): Action {
+function createNote(text: string): IAction {
   return {
     type: actionTypes.CREATE_NOTE,
     payload: {
@@ -25,7 +23,7 @@ function createNote(text: string): Action {
 /**
  * Returns the action to update a note
  */
-function updateNote(updatedNote: Note): Action {
+function updateNote(updatedNote: INote): IAction {
   if (!isV4(updatedNote.id)) {
     throw new Error(`params have not valid uuids ${JSON.stringify(updatedNote)}`);
   }
@@ -39,7 +37,7 @@ function updateNote(updatedNote: Note): Action {
 /**
  * Returns the action to delete a note
  */
-function deleteNote(id: string): Action {
+function deleteNote(id: string): IAction {
   if (!isV4(id)) {
     throw new Error(`params have not valid uuids ${id}`);
   }

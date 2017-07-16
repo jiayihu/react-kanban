@@ -1,23 +1,23 @@
 // @flow
 
-export interface BaseAction {
+export interface IBaseAction {
   type: string,
 }
 
-export interface Action extends BaseAction {
+export interface IAction extends IBaseAction {
   type: string,
   payload: any,
 }
 
-export interface Note {
+export interface INote {
   id: string,
   name?: string,
   editing?: boolean,
 }
 
-export interface Lane {
+export interface ILane {
   id: string,
   name: string,
   editing: boolean,
-  notes: Note[],
+  notes: INote[],
 }

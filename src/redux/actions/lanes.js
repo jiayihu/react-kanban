@@ -4,12 +4,12 @@ import uuid from 'uuid';
 import { isV4 } from '../../helpers';
 import * as actionTypes from '../../constants/actionTypes';
 
-import type { Action, Lane } from '../../types';
+import type { IAction, ILane } from '../../types';
 
 /**
  * Returns a createLane action
  */
-function createLane(name: string): Action {
+function createLane(name: string): IAction {
   return {
     type: actionTypes.CREATE_LANE,
     payload: {
@@ -23,7 +23,7 @@ function createLane(name: string): Action {
 /**
  * Returns the action to update a lane
  */
-function updateLane(updatedLane: Lane): Action {
+function updateLane(updatedLane: ILane): IAction {
   if (!isV4(updatedLane.id)) {
     throw new Error(`params have not valid uuids ${JSON.stringify(updatedLane)}`);
   }
@@ -37,7 +37,7 @@ function updateLane(updatedLane: Lane): Action {
 /**
  * Returns an action to delete a lane
  */
-function deleteLane(id: string): Action {
+function deleteLane(id: string): IAction {
   if (!isV4(id)) {
     throw new Error(`params have not valid uuids ${id}`);
   }
@@ -53,7 +53,7 @@ function deleteLane(id: string): Action {
 /**
  * Returns an action to attach a note to a lane
  */
-function attachToLane(laneId: string, noteId: string): Action {
+function attachToLane(laneId: string, noteId: string): IAction {
   if (!isV4(laneId) || !isV4(noteId)) {
     throw new Error(`params have not valid uuids ${laneId} ${noteId}`);
   }
@@ -70,7 +70,7 @@ function attachToLane(laneId: string, noteId: string): Action {
 /**
  * Returns an action to detach a note from a lane
  */
-function detachFromLane(laneId: string, noteId: string): Action {
+function detachFromLane(laneId: string, noteId: string): IAction {
   if (!isV4(laneId) || !isV4(noteId)) {
     throw new Error(`params have not valid uuids ${laneId} ${noteId}`);
   }

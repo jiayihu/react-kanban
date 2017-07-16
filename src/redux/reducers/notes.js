@@ -2,11 +2,11 @@
 
 import * as actionTypes from '../../constants/actionTypes';
 
-import type { Action, Note } from '../../types';
+import type { IAction, INote } from '../../types';
 
-export type NotesState = $ReadOnlyArray<Note>;
+export type NotesState = $ReadOnlyArray<INote>;
 
-export default function notes(state: NotesState = [], action: Action): NotesState {
+export default function notes(state: NotesState = [], action: IAction): NotesState {
   switch (action.type) {
     case actionTypes.CREATE_NOTE:
       return state.concat(action.payload);
