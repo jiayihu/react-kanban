@@ -2,7 +2,14 @@
 
 import React, { PropTypes } from 'react';
 
-export default class Note extends React.Component {
+type Props = {
+  children?: React.Element<*>,
+  connectDragSource: Function,
+  connectDropTarget: Function,
+  isDragging: boolean,
+};
+
+export default class Note extends React.Component<*, Props, *> {
   render() {
     const connectDragSource = this.props.connectDragSource;
     const connectDropTarget = this.props.connectDropTarget;

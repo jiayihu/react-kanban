@@ -5,7 +5,16 @@ import './_lanes.scss';
 import React, { PropTypes } from 'react';
 import Lane from '../../containers/Lane.jsx';
 
-export default class Lanes extends React.Component {
+import type { ILane } from '../../types';
+
+type Props = {
+  lanes: ILane[],
+  onEditLane: Function,
+  onDeleteLane: Function,
+  onMoveLane: Function,
+};
+
+export default class Lanes extends React.Component<*, Props, *> {
   render() {
     const lanes = this.props.lanes.map(lane =>
       <Lane

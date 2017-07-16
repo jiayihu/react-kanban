@@ -9,7 +9,18 @@ import Lanes from '../components/Lanes/Lanes.jsx';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
-class App extends React.Component {
+import type { ILane } from '../types';
+
+type Props = {
+  lanes: ILane[],
+  onCreateLane: Function,
+  onDeleteLane: Function,
+  onEditLane: Function,
+  onMoveLane: Function,
+  onReset: Function,
+};
+
+class App extends React.Component<*, Props, *> {
   render() {
     return (
       <div className="react-kanban">

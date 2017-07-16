@@ -4,7 +4,23 @@ import React, { PropTypes } from 'react';
 import Notes from './Notes/Notes.jsx';
 import Editable from './Editable.jsx';
 
-export default class Lane extends React.Component {
+import type { INote, ILane } from '../types';
+
+type Props = {
+  allNotes: INote[],
+  connectDragPreview: Function,
+  connectDragSource: Function,
+  connectDropTarget: Function,
+  lane: ILane,
+  onCreateNote: Function,
+  onDeleteLane: Function,
+  onDeleteNote: Function,
+  onEditLane: Function,
+  onEditNote: Function,
+  onMoveNote: Function,
+};
+
+export default class Lane extends React.Component<*, Props, *> {
   constructor() {
     super();
     (this: any).handleCreateNote = this.handleCreateNote.bind(this);
@@ -70,14 +86,14 @@ export default class Lane extends React.Component {
 
 Lane.propTypes = {
   allNotes: PropTypes.array.isRequired,
-  connectDragPreview: PropTypes.func.isRequired,
-  connectDragSource: PropTypes.func.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,
+  connectDragPreview: Function,
+  connectDragSource: Function,
+  connectDropTarget: Function,
   lane: PropTypes.object.isRequired,
-  onCreateNote: PropTypes.func.isRequired,
-  onDeleteLane: PropTypes.func.isRequired,
-  onDeleteNote: PropTypes.func.isRequired,
-  onEditLane: PropTypes.func.isRequired,
-  onEditNote: PropTypes.func.isRequired,
-  onMoveNote: PropTypes.func.isRequired,
+  onCreateNote: Function,
+  onDeleteLane: Function,
+  onDeleteNote: Function,
+  onEditLane: Function,
+  onEditNote: Function,
+  onMoveNote: Function,
 };

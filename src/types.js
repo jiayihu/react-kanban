@@ -11,7 +11,7 @@ export interface IAction extends IBaseAction {
 
 export interface INote {
   id: string,
-  name?: string,
+  text?: string,
   editing?: boolean,
 }
 

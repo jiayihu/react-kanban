@@ -2,7 +2,16 @@
 
 import React, { PropTypes } from 'react';
 
-export default class Editable extends React.Component {
+type Props = {
+  editing?: boolean,
+  id: string,
+  onDelete?: Function,
+  onEdit: Function,
+  onValueClick: Function,
+  value: string,
+};
+
+export default class Editable extends React.Component<*, Props, *> {
   constructor() {
     super();
     (this: any).handleDelete = this.handleDelete.bind(this);
@@ -12,7 +21,7 @@ export default class Editable extends React.Component {
   }
 
   handleDelete() {
-    this.props.onDelete(this.props.id);
+    if (this.props.onDelete) this.props.onDelete(this.props.id);
   }
 
   handleValueClick() {
@@ -62,7 +71,12 @@ export default class Editable extends React.Component {
   renderValue() {
     return (
       <span>
-        <input type="text" onClick={this.handleValueClick} defaultValue={this.props.value} readOnly />
+        <input
+          type="text"
+          onClick={this.handleValueClick}
+          defaultValue={this.props.value}
+          readOnly
+        />
         {this.props.onDelete ? this.renderDelete() : null}
       </span>
     );

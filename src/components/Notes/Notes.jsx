@@ -6,7 +6,17 @@ import React, { PropTypes } from 'react';
 import Note from '../../containers/Note.jsx';
 import Editable from '../Editable.jsx';
 
-export default class Notes extends React.Component {
+import type { INote } from '../../types';
+
+type Props = {
+  notes: INote[],
+  onDeleteNote: Function,
+  onEditNote: Function,
+  onMoveNote: Function,
+  onValueClick: Function,
+};
+
+export default class Notes extends React.Component<*, Props, *> {
   render() {
     const notes = this.props.notes.map(note =>
       <Note id={note.id} key={note.id} onMoveNote={this.props.onMoveNote}>
