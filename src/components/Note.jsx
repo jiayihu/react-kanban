@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 
 type Props = {
-  children?: React.Element<*>,
+  children?: React$Node<*>,
   connectDragSource: Function,
   connectDropTarget: Function,
   isDragging: boolean,

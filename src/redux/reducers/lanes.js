@@ -2,7 +2,6 @@
 
 import * as actionTypes from '../../constants/actionTypes';
 import uuid from 'uuid';
-import update from 'react-addons-update';
 
 import type { IAction, ILane } from '../../types';
 
@@ -87,7 +86,6 @@ export default function lanes(state: LanesState = defaultState, action: IAction)
     case actionTypes.MOVE_NOTE: {
       const sourceId = action.payload.sourceId;
       const targetId = action.payload.targetId;
-      console.log(sourceId, targetId);
       const sourceLane = state.filter(lane => ~lane.notes.indexOf(sourceId))[0];
       const targetLane = state.filter(lane => ~lane.notes.indexOf(targetId))[0];
       const sourceNoteIndex = sourceLane.notes.indexOf(sourceId);
@@ -96,10 +94,14 @@ export default function lanes(state: LanesState = defaultState, action: IAction)
       if (sourceLane.id === targetLane.id) {
         return state.map(lane => {
           if (lane.id === sourceLane.id) {
+            const notesWithoutSource = sourceLane.notes.filter(
+              (note, index) => index !== sourceNoteIndex
+            );
+            const notesWithTarget = notesWithoutSource.slice();
+            notesWithTarget.splice(targetNoteIndex, 0, sourceId);
+
             return Object.assign({}, lane, {
-              notes: update(sourceLane.notes, {
-                $splice: [[sourceNoteIndex, 1], [targetNoteIndex, 0, sourceId]],
-              }),
+              notes: notesWithTarget,
             });
           }
 
@@ -110,17 +112,16 @@ export default function lanes(state: LanesState = defaultState, action: IAction)
       return state.map(lane => {
         if (lane.id === sourceLane.id) {
           return Object.assign({}, lane, {
-            notes: update(lane.notes, {
-              $splice: [[sourceNoteIndex, 1]],
-            }),
+            notes: lane.notes.filter((note, index) => index !== sourceNoteIndex),
           });
         }
 
         if (lane.id === targetLane.id) {
+          const notesWithTarget = lane.notes.slice();
+          notesWithTarget.splice(targetNoteIndex, 0, sourceId);
+
           return Object.assign({}, lane, {
-            notes: update(lane.notes, {
-              $splice: [[targetNoteIndex, 0, sourceId]],
-            }),
+            notes: notesWithTarget,
           });
         }
 
@@ -135,9 +136,13 @@ export default function lanes(state: LanesState = defaultState, action: IAction)
       const sourceLaneIndex = state.findIndex(lane => lane.id === sourceId);
       const targetLaneIndex = state.findIndex(lane => lane.id === targetId);
 
-      return update(state, {
-        $splice: [[sourceLaneIndex, 1], [targetLaneIndex, 0, sourceLane]],
-      });
+      if (!sourceLane) return state;
+
+      const lanesWithoutSource = state.filter((lane, index) => index !== sourceLaneIndex);
+      const lanesWithTarget = lanesWithoutSource.slice();
+      lanesWithTarget.splice(targetLaneIndex, 0, sourceLane);
+
+      return lanesWithTarget;
     }
 
     default:

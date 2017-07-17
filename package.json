@@ -58,7 +58,6 @@
   "dependencies": {
     "localforage": "^1.4.0",
     "react": "^15.6.1",
-    "react-addons-update": "^15.0.1",
     "react-dnd": "^2.1.2",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.0.1",

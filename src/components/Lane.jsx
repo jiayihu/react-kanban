@@ -86,14 +86,14 @@ export default class Lane extends React.Component<*, Props, *> {
 
 Lane.propTypes = {
   allNotes: PropTypes.array.isRequired,
-  connectDragPreview: Function,
-  connectDragSource: Function,
-  connectDropTarget: Function,
+  connectDragPreview: PropTypes.func.isRequired,
+  connectDragSource: PropTypes.func.isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
   lane: PropTypes.object.isRequired,
-  onCreateNote: Function,
-  onDeleteLane: Function,
-  onDeleteNote: Function,
-  onEditLane: Function,
-  onEditNote: Function,
-  onMoveNote: Function,
+  onCreateNote: PropTypes.func.isRequired,
+  onDeleteLane: PropTypes.func.isRequired,
+  onDeleteNote: PropTypes.func.isRequired,
+  onEditLane: PropTypes.func.isRequired,
+  onEditNote: PropTypes.func.isRequired,
+  onMoveNote: PropTypes.func.isRequired,
 };
