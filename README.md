@@ -13,5 +13,5 @@ The project went under different phases of development. Browse the latest commit
 2. [ES6 + Browserify version](https://github.com/jiayihu/react-kanban/tree/337b72abc895817723493abffb4e0724e6b8aa29)
 3. [ES6 + Webpack version](https://github.com/jiayihu/react-kanban/tree/9293fd4f097f0086bac112d108eaf7b4877d5218)
 4. ES6 + Webpack + Flow types: **current**.
-  1. Previous versions had JSDoc comments instead of [Flow](https://flow.org/).
-  2. `PropTypes` are now automatically generated from Flow types for components
+   1. Previous versions had JSDoc comments instead of [Flow](https://flow.org/).
+   2. `PropTypes` are now automatically generated from Flow types for components
