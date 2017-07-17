@@ -2,7 +2,7 @@
 
 import './_lanes.scss';
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Lane from '../../containers/Lane.jsx';
 
 import type { ILane } from '../../types';
@@ -33,10 +33,3 @@ export default class Lanes extends React.Component<*, Props, *> {
     );
   }
 }
-
-Lanes.propTypes = {
-  lanes: PropTypes.array.isRequired,
-  onEditLane: PropTypes.func.isRequired,
-  onDeleteLane: PropTypes.func.isRequired,
-  onMoveLane: PropTypes.func.isRequired,
-};

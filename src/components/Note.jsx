@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 type Props = {
   children?: React$Node<*>,
@@ -24,10 +24,3 @@ export default class Note extends React.Component<*, Props, *> {
     );
   }
 }
-
-Note.propTypes = {
-  children: PropTypes.node,
-  connectDragSource: PropTypes.func.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,
-  isDragging: PropTypes.bool,
-};

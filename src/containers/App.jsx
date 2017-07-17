@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import lanesActions from '../redux/actions/lanes';
 import { connect } from 'react-redux';
@@ -41,15 +41,6 @@ class App extends React.Component<*, Props, *> {
     );
   }
 }
-
-App.propTypes = {
-  lanes: PropTypes.array.isRequired,
-  onCreateLane: PropTypes.func.isRequired,
-  onDeleteLane: PropTypes.func.isRequired,
-  onEditLane: PropTypes.func.isRequired,
-  onMoveLane: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = state => ({
   lanes: state.lanes,

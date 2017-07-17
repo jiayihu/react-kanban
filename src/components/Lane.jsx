@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Notes from './Notes/Notes.jsx';
 import Editable from './Editable.jsx';
 
@@ -83,17 +83,3 @@ export default class Lane extends React.Component<*, Props, *> {
     );
   }
 }
-
-Lane.propTypes = {
-  allNotes: PropTypes.array.isRequired,
-  connectDragPreview: PropTypes.func.isRequired,
-  connectDragSource: PropTypes.func.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,
-  lane: PropTypes.object.isRequired,
-  onCreateNote: PropTypes.func.isRequired,
-  onDeleteLane: PropTypes.func.isRequired,
-  onDeleteNote: PropTypes.func.isRequired,
-  onEditLane: PropTypes.func.isRequired,
-  onEditNote: PropTypes.func.isRequired,
-  onMoveNote: PropTypes.func.isRequired,
-};

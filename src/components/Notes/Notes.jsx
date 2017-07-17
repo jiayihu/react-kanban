@@ -2,7 +2,7 @@
 
 import './_notes.scss';
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Note from '../../containers/Note.jsx';
 import Editable from '../Editable.jsx';
 
@@ -38,11 +38,3 @@ export default class Notes extends React.Component<*, Props, *> {
     );
   }
 }
-
-Notes.propTypes = {
-  notes: PropTypes.array.isRequired,
-  onDeleteNote: PropTypes.func.isRequired,
-  onEditNote: PropTypes.func.isRequired,
-  onMoveNote: PropTypes.func.isRequired,
-  onValueClick: PropTypes.func.isRequired,
-};

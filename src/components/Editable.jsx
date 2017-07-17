@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 type Props = {
   editing?: boolean,
@@ -90,12 +90,3 @@ export default class Editable extends React.Component<*, Props, *> {
     return this.renderValue();
   }
 }
-
-Editable.propTypes = {
-  editing: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  onDelete: PropTypes.func,
-  onEdit: PropTypes.func.isRequired,
-  onValueClick: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-};
