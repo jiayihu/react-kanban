@@ -439,7 +439,6 @@ input {
   margin-bottom: .5em;
   padding: .5em 1em;
   text-align: left; }
-
 .add-lane {
   background-color: #00BCD4;
   margin-bottom: .4em;
@@ -525,7 +524,6 @@ input {
     .lane__drag:focus {
       -webkit-box-shadow: none;
               box-shadow: none; }
-
 .add-note {
   background-color: #ec1c4b;
   height: 2em;
