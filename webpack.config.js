@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const root = {
   src: path.join(__dirname, 'src'),
@@ -24,7 +25,8 @@ const devPlugings = [
 ];
 
 const prodPlugins = [
-  new webpack.optimize.UglifyJsPlugin({
+  new webpack.optimize.ModuleConcatenationPlugin(),
+  new UglifyJsPlugin({
     sourceMap: false,
     comments: false,
   }),
@@ -43,21 +45,18 @@ const prodPlugins = [
   new ExtractTextPlugin('styles.css'),
 ];
 
-const devEntry = [
-  'react-hot-loader/patch',
-  root.src,
-];
+const devEntry = ['react-hot-loader/patch', root.src];
 
-const prodEntry = [
-  root.src,
-];
+const prodEntry = [root.src];
 
 module.exports = {
-  devServer: IS_DEV ? {
-    historyApiFallback: true,
-    noInfo: false,
-    port: 3000,
-  } : {},
+  devServer: IS_DEV
+    ? {
+      historyApiFallback: true,
+      noInfo: false,
+      port: 3000,
+    }
+    : {},
   devtool: IS_DEV ? 'eval' : 'source-map',
   entry: {
     main: IS_DEV ? devEntry : prodEntry,
@@ -91,7 +90,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: IS_DEV
-          ? ['style-loader', { loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader']
+          ? [
+            'style-loader',
+              { loader: 'css-loader', options: { importLoaders: 1 } },
+            'postcss-loader',
+          ]
           : ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [{ loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader'],
@@ -103,17 +106,17 @@ module.exports = {
         loader: IS_DEV
           ? [
             'style-loader',
-            { loader: 'css-loader', options: { importLoaders: 1 } },
+              { loader: 'css-loader', options: { importLoaders: 1 } },
             'postcss-loader',
-            { loader: 'sass-loader', options: { includePaths: [root.src] } },
+              { loader: 'sass-loader', options: { includePaths: [root.src] } },
           ]
           : ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
-              { loader: 'css-loader', options: { importLoaders: 1 } },
-              'postcss-loader',
-              { loader: 'sass-loader', options: { includePaths: [root.src] } },
-            ],
+                { loader: 'css-loader', options: { importLoaders: 1 } },
+                'postcss-loader',
+                { loader: 'sass-loader', options: { includePaths: [root.src] } },
+              ],
           }),
         include: root.src,
       },
