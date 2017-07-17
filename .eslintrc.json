@@ -1,10 +1,21 @@
 {
   "rules": {
+    "arrow-parens": [2, "as-needed"],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "ignore"
+    }],
+    "import/extensions": 0,
+    "import/first": 0,
+    "jsx-a11y/href-no-hash": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
     "keyword-spacing": [2],
     "max-len": [2, {"code": 120, "tabWidth": 2, "ignoreUrls": true}],
     "new-cap": 0,
     "no-console": 0,
-    "no-param-reassign": 0,
     "prefer-arrow-callback": [2, { "allowNamedFunctions": true }],
     "react/prefer-stateless-function": 0,
     "react/prop-types": 0,
@@ -12,6 +23,7 @@
   },
 
   "env": {
+    "browser": true,
     "mocha": true
   },
 

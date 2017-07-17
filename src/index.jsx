@@ -22,7 +22,7 @@ localStore
   .getItem('state')
   // If value is null ES6 default params don't work
   .then(
-    value => (value = value || undefined),
+    value => value || undefined,
     err => {
       console.error(err);
       return undefined;

@@ -12,12 +12,15 @@ type Props = {
 };
 
 export default class Editable extends React.Component<*, Props, *> {
+  static selectToEnd(input: HTMLInputElement) {
+    if (input) input.focus();
+  }
+
   constructor() {
     super();
     (this: any).handleDelete = this.handleDelete.bind(this);
     (this: any).handleValueClick = this.handleValueClick.bind(this);
     (this: any).handleFinishEdit = this.handleFinishEdit.bind(this);
-    (this: any).selectToEnd = this.selectToEnd.bind(this);
   }
 
   handleDelete() {
@@ -40,19 +43,12 @@ export default class Editable extends React.Component<*, Props, *> {
     }
   }
 
-  selectToEnd(input: HTMLInputElement) {
-    if (input) {
-      input.selectionEnd = this.props.value.length;
-    }
-  }
-
   renderEdit() {
     return (
       <input
         type="text"
-        autoFocus
         className="editing"
-        ref={this.selectToEnd}
+        ref={Editable.selectToEnd}
         defaultValue={this.props.value}
         onBlur={this.handleFinishEdit}
         onKeyPress={this.handleFinishEdit}

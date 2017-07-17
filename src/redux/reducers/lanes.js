@@ -52,7 +52,7 @@ export default function lanes(state: LanesState = defaultState, action: IAction)
 
       return state.map(lane => {
         noteIndex = lane.notes.indexOf(noteId);
-        if (~noteIndex) {
+        if (noteIndex !== -1) {
           return Object.assign({}, lane, {
             notes: lane.notes.filter(id => id !== noteId),
           });
@@ -86,8 +86,8 @@ export default function lanes(state: LanesState = defaultState, action: IAction)
     case actionTypes.MOVE_NOTE: {
       const sourceId = action.payload.sourceId;
       const targetId = action.payload.targetId;
-      const sourceLane = state.filter(lane => ~lane.notes.indexOf(sourceId))[0];
-      const targetLane = state.filter(lane => ~lane.notes.indexOf(targetId))[0];
+      const sourceLane = state.filter(lane => lane.notes.indexOf(sourceId) !== -1)[0];
+      const targetLane = state.filter(lane => lane.notes.indexOf(targetId) !== -1)[0];
       const sourceNoteIndex = sourceLane.notes.indexOf(sourceId);
       const targetNoteIndex = targetLane.notes.indexOf(targetId);
 

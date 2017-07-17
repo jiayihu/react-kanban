@@ -19,7 +19,7 @@ type Props = {
 export default class Notes extends React.Component<*, Props, *> {
   render() {
     const notes = this.props.notes.map(note =>
-      <Note id={note.id} key={note.id} onMoveNote={this.props.onMoveNote}>
+      (<Note id={note.id} key={note.id} onMoveNote={this.props.onMoveNote}>
         <Editable
           editing={note.editing}
           id={note.id}
@@ -28,7 +28,7 @@ export default class Notes extends React.Component<*, Props, *> {
           onEdit={this.props.onEditNote}
           onValueClick={this.props.onValueClick}
         />
-      </Note>
+      </Note>),
     );
 
     return (

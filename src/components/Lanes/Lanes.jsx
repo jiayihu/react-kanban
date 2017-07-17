@@ -17,13 +17,13 @@ type Props = {
 export default class Lanes extends React.Component<*, Props, *> {
   render() {
     const lanes = this.props.lanes.map(lane =>
-      <Lane
+      (<Lane
         key={lane.id}
         lane={lane}
         onEditLane={this.props.onEditLane}
         onDeleteLane={this.props.onDeleteLane}
         onMoveLane={this.props.onMoveLane}
-      />
+      />),
     );
 
     return (
